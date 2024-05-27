@@ -73,7 +73,7 @@ section p {
 
 /* Home Section */
 section#home {
-    background: url('../images/home.jpg') no-repeat center center/cover;
+    background: none;
     color: white;
     text-align: center;
     padding: 100px 0;
@@ -305,6 +305,21 @@ footer {
     text-align: left;
     padding: 20px 0;
 }
+/* CSS específico para la página de resultados */
+#resultMessage {
+    text-align: center;
+}
+
+#resultMessage img {
+    display: block;
+    margin: 0 auto;
+}
+
+#resultMessage p {
+    text-align: center;
+    font-size: 1.2em;
+    color: #333;
+}
 
 /* Animations */
 @keyframes fadeIn {
@@ -372,3 +387,4 @@ footer {
         padding: 15px;
     }
 }
+
