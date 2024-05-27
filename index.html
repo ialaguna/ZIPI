@@ -14,11 +14,36 @@
             background: url('images/header.jpg') no-repeat center center/cover;
         }
     </style>
+    <script type="module">
+        // Import the functions you need from the SDKs you need
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.1/firebase-app.js";
+        import { getDatabase, ref, push, onValue } from "https://www.gstatic.com/firebasejs/10.12.1/firebase-database.js";
+        // Your web app's Firebase configuration
+        const firebaseConfig = {
+            apiKey: "AIzaSyAvydCRYCLSjtn3aVb6NMiuSSigDoos_Jk",
+            authDomain: "zipi-35801.firebaseapp.com",
+            projectId: "zipi-35801",
+            storageBucket: "zipi-35801.appspot.com",
+            messagingSenderId: "547970717661",
+            appId: "1:547970717661:web:8fb15b9fa5ea710bd38834",
+            measurementId: "G-LXMB9WNQRF"
+        };
+
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+        const database = getDatabase(app);
+
+        // Make database available globally
+        window.database = database;
+        window.firebaseRef = ref;
+        window.firebasePush = push;
+        window.firebaseOnValue = onValue;
+    </script>
 </head>
 <body>
     <header>
         <div class="container">
-            <h1> </h1>
+            <h1>Zipi</h1>
             <nav>
                 <ul>
                     <li><a href="#home">Inicio</a></li>
@@ -143,28 +168,4 @@
 
     <script src="js/script.js"></script>
 </body>
-	<script type="module">
-  // Import the functions you need from the SDKs you need
-  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.1/firebase-app.js";
-  import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.12.1/firebase-analytics.js";
-  // TODO: Add SDKs for Firebase products that you want to use
-  // https://firebase.google.com/docs/web/setup#available-libraries
-
-  // Your web app's Firebase configuration
-  // For Firebase JS SDK v7.20.0 and later, measurementId is optional
-  const firebaseConfig = {
-    apiKey: "AIzaSyAvydCRYCLSjtn3aVb6NMiuSSigDoos_Jk",
-    authDomain: "zipi-35801.firebaseapp.com",
-    projectId: "zipi-35801",
-    storageBucket: "zipi-35801.appspot.com",
-    messagingSenderId: "547970717661",
-    appId: "1:547970717661:web:8fb15b9fa5ea710bd38834",
-    measurementId: "G-LXMB9WNQRF"
-  };
-
-  // Initialize Firebase
-  const app = initializeApp(firebaseConfig);
-  const analytics = getAnalytics(app);
-</script>
 </html>
-
