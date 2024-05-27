@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, orientation=landscape">
-    <title>Resultado del Juego - Zipi</title>
+    <title>Zipi - El Mejor Zurracapote</title>
     <link rel="stylesheet" href="css/styles.css">
     <style>
         body {
@@ -14,49 +14,50 @@
             background: url('images/header.jpg') no-repeat center center/cover;
         }
     </style>
-  <script type="module">
-    // Import the functions you need from the SDKs you need
-    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.1/firebase-app.js";
-    import { getDatabase, ref, push, onValue } from "https://www.gstatic.com/firebasejs/10.12.1/firebase-database.js";
+    <script type="module">
+        // Import the functions you need from the SDKs you need
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.1/firebase-app.js";
+        import { getDatabase, ref, push, onValue } from "https://www.gstatic.com/firebasejs/10.12.1/firebase-database.js";
 
-    // Your web app's Firebase configuration
-    const firebaseConfig = {
-        apiKey: "AIzaSyAvydCRYCLSjtn3aVb6NMiuSSigDoos_Jk",
-        authDomain: "zipi-35801.firebaseapp.com",
-        databaseURL: "https://zipi-35801-default-rtdb.firebaseio.com/",
-        projectId: "zipi-35801",
-        storageBucket: "zipi-35801.appspot.com",
-        messagingSenderId: "547970717661",
-        appId: "1:547970717661:web:8fb15b9fa5ea710bd38834",
-        measurementId: "G-LXMB9WNQRF"
-    };
+        // Your web app's Firebase configuration
+        const firebaseConfig = {
+            apiKey: "AIzaSyAvydCRYCLSjtn3aVb6NMiuSSigDoos_Jk",
+            authDomain: "zipi-35801.firebaseapp.com",
+            databaseURL: "https://zipi-35801-default-rtdb.firebaseio.com", // Reemplaza con tu databaseURL real
+            projectId: "zipi-35801",
+            storageBucket: "zipi-35801.appspot.com",
+            messagingSenderId: "547970717661",
+            appId: "1:547970717661:web:8fb15b9fa5ea710bd38834",
+            measurementId: "G-LXMB9WNQRF"
+        };
 
-    // Initialize Firebase
-    const app = initializeApp(firebaseConfig);
-    const database = getDatabase(app);
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+        const database = getDatabase(app);
 
-    // Make database available globally
-    window.database = database;
-    window.firebaseRef = ref;
-    window.firebasePush = push;
-    window.firebaseOnValue = onValue;
-</script>
+        // Make database available globally
+        window.database = database;
+        window.firebaseRef = ref;
+        window.firebasePush = push;
+        window.firebaseOnValue = onValue;
+    </script>
 </head>
 <body>
     <header>
         <div class="container">
-            <h1> </h1>
+            <h1>Zipi</h1>
             <nav>
                 <ul>
-                    <li><a href="index.html#home">Inicio</a></li>
-                    <li><a href="index.html#products">Productos</a></li>
-                    <li><a href="index.html#game">Juego</a></li>
-                    <li><a href="index.html#about">Sobre Nosotros</a></li>
-                    <li><a href="index.html#contact">Contacto</a></li>
+                    <li><a href="#home">Inicio</a></li>
+                    <li><a href="#products">Productos</a></li>
+                    <li><a href="#game">Juego</a></li>
+                    <li><a href="#about">Sobre Nosotros</a></li>
+                    <li><a href="#contact">Contacto</a></li>
                 </ul>
             </nav>
         </div>
     </header>
+
     <section id="home">
         <div class="container">
             <h2>Bienvenidos a Zipi</h2>
@@ -167,6 +168,7 @@
         </div>
     </footer>
 
-    <script src="js/script.js"></script>
+    <script src="js/script.js" type="module"></script>
 </body>
 </html>
+
