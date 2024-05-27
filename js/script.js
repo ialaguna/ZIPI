@@ -23,7 +23,7 @@ document.getElementById('registerForm').addEventListener('submit', function(even
                     window.location.href = 'result.html';
                 })
                 .catch((error) => {
-                    console.log('Error al guardar en Firebase:', error);
+                    console.error('Error al guardar en Firebase:', error);
                 });
         };
         reader.readAsDataURL(photo);
