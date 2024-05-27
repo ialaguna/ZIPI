@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Zipi - El Mejor Zurracapote</title>
+    <link rel="stylesheet" href="css/styles.css">
+	<style>
+        body {
+            background: url('images/background.jpg') no-repeat center center fixed; 
+            background-size: cover;
+        }
+        header {
+            background: url('images/header.jpg') no-repeat center center/cover;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>Zipi</h1>
+            <nav>
+                <ul>
+                    <li><a href="#home">Inicio</a></li>
+                    <li><a href="#products">Productos</a></li>
+                    <li><a href="#game">Juego</a></li>
+                    <li><a href="#about">Sobre Nosotros</a></li>
+                    <li><a href="#contact">Contacto</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <section id="home">
+        <div class="container">
+            <h2>Bienvenidos a Zipi</h2>
+            <p class="center-text">Disfruta del mejor Zurracapote.</p>
+            <img src="images/home.jpg" alt="Zurracapote">
+        </div>
+    </section>
+
+    <section id="products">
+        <div class="container">
+            <h2>Productos</h2>
+            <div class="product-slider">
+                <div class="product">
+                    <div class="carousel" id="carousel1">
+                        <img src="images/zipi-product1-1.jpg" class="carousel-image" alt="Producto 1 Imagen 1">
+                        <img src="images/zipi-product1-2.jpg" class="carousel-image" alt="Producto 1 Imagen 2">
+                        <img src="images/zipi-product1-3.jpg" class="carousel-image" alt="Producto 1 Imagen 3">
+                        <button class="prev" onclick="plusSlides(-1, 0)">&#10094;</button>
+                        <button class="next" onclick="plusSlides(1, 0)">&#10095;</button>
+                    </div>
+                    <p>Zipi TINTO - 1.60€</p>
+                </div>
+                <div class="product">
+                    <div class="carousel" id="carousel2">
+                        <img src="images/zipi-product2-1.jpg" class="carousel-image" alt="Producto 2 Imagen 1">
+                        <img src="images/zipi-product2-2.jpg" class="carousel-image" alt="Producto 2 Imagen 2">
+                        <img src="images/zipi-product2-3.jpg" class="carousel-image" alt="Producto 2 Imagen 3">
+                        <button class="prev" onclick="plusSlides(-1, 1)">&#10094;</button>
+                        <button class="next" onclick="plusSlides(1, 1)">&#10095;</button>
+                    </div>
+                    <p>Zipi BLANCO - 1.60€</p>
+                </div>
+                <div class="product">
+                    <div class="carousel" id="carousel3">
+                        <img src="images/zipi-product3-1.jpg" class="carousel-image" alt="Producto 3 Imagen 1">
+                        <img src="images/zipi-product3-2.jpg" class="carousel-image" alt="Producto 3 Imagen 2">
+                        <img src="images/zipi-product3-3.jpg" class="carousel-image" alt="Producto 3 Imagen 3">
+                        <button class="prev" onclick="plusSlides(-1, 2)">&#10094;</button>
+                        <button class="next" onclick="plusSlides(1, 2)">&#10095;</button>
+                    </div>
+                    <p>Zipi ROSADO - 1.60€</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="game">
+        <div class="container">
+            <h2>Juego</h2>
+			<p class="white-text">Si te gusta tanto conocer gente como nuestro zurra, anímate y juega a nuestro juego para conocer gente y ganar bebida gratis! Solo tendrás que registrarte con tu nombre y una foto tuya y te proporcionaremos la foto y un nombre de otra persona aleatoria que deberás encontrar antes de que pasen 24h para poder conseguir un Zipi GRATUITO. ¿Te animas?</p>
+            <form id="registerForm">
+                <label for="username">Nombre:</label>
+                <input type="text" id="username" name="username" required>
+
+                <label for="photo">Foto:</label>
+                <input type="file" id="photo" name="photo" accept="image/*" required>
+
+                <button type="submit">Registrarse</button>
+            </form>
+        </div>
+    </section>
+
+    <section id="about">
+        <div class="container">
+            <h2>Sobre Nosotros</h2>
+            <div class="value">
+                <h3>Autenticidad</h3>
+                <p><em><b>ZIPI se compromete a mantener viva la tradición del Zurracapote, utilizando métodos de elaboración tradicionales y los ingredientes locales.</b></em><br><br> Esto se refleja en la transparencia sobre nuestros procesos de elaboración, la honestidad en nuestra comunicación y la preservación de la historia y cultura del Zurracapote en nuestras promociones.</p>
+            </div>
+            <div class="value">
+                <h3>Diversión</h3>
+                <p><b><em>ZIPI es una bebida para momentos de felicidad y disfrute. Queremos que nuestros consumidores asocien ZIPI con experiencias memorables y positivas.</b></em><br><br> Creamos campañas y eventos que fomentan la diversión, el disfrute y el compartir buenos momentos, como promociones especiales, fiestas temáticas y concursos interactivos.</p>
+            </div>
+            <div class="value">
+                <h3>Innovación</h3>
+                <p><b><em>ZIPI valora la innovación y está siempre buscando nuevas maneras de sorprender a nuestros clientes, sin perder nuestras raíces tradicionales.</b></em><br><br> Introducimos nuevas variedades y ediciones limitadas, y exploramos formas creativas de consumir ZIPI, como el uso del "ZAPE" (tapón de porrón).</p>
+            </div>
+            <div class="value">
+                <h3>Comunidad</h3>
+                <p><b><em>ZIPI se enorgullece de formar parte de la comunidad y se esfuerza por apoyar y conectarse con los consumidores.</b></em><br><br> Participamos en eventos comunitarios, apoyamos iniciativas locales y construimos una comunidad activa en nuestras redes sociales.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact">
+        <div class="container">
+            <h2>Contacto</h2>
+            <form action="https://formspree.io/f/mpzvernw" method="POST">
+                <label for="name">Nombre:</label>
+                <input type="text" id="name" name="name" required>
+
+                <label for="email">Correo Electrónico:</label>
+                <input type="email" id="email" name="email" required>
+
+                <label for="message">Mensaje:</label>
+                <textarea id="message" name="message" required></textarea>
+
+                <button type="submit">Enviar</button>
+            </form>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2024 Zipi. Todos los derechos reservados.</p>
+        </div>
+    </footer>
+
+    <script src="js/script.js"></script>
+</body>
+</html>

@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resultado del Juego - Zipi</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>Zipi</h1>
+            <nav>
+                <ul>
+                    <li><a href="index.html#home">Inicio</a></li>
+                    <li><a href="index.html#products">Productos</a></li>
+                    <li><a href="index.html#game">Juego</a></li>
+                    <li><a href="index.html#about">Sobre Nosotros</a></li>
+                    <li><a href="index.html#contact">Contacto</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <section id="result">
+        <div class="container">
+            <h2>Resultado del Juego</h2>
+            <div id="resultMessage">
+                <p>Para un Zurra gratis tienes que encontrarte con...</p>
+                <img id="randomPhoto" src="" alt="Foto del usuario">
+                <p id="randomUser"></p>
+            </div>
+            <div id="countdown"></div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2024 Zipi. Todos los derechos reservados.</p>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            let user = JSON.parse(localStorage.getItem('currentUser'));
+            if (user) {
+                document.getElementById('randomPhoto').src = user.photo;
+                document.getElementById('randomUser').textContent = user.name;
+            } else {
+                document.getElementById('resultMessage').textContent = 'No hay usuarios suficientes para jugar.';
+            }
+
+            // Inicializar el contador
+            let countdown = 86400; // 24 horas en segundos
+            let countdownElement = document.getElementById('countdown');
+
+            function updateCountdown() {
+                let hours = Math.floor(countdown / 3600);
+                let minutes = Math.floor((countdown % 3600) / 60);
+                let seconds = countdown % 60;
+
+                countdownElement.textContent = `Tiempo restante: ${hours}h ${minutes}m ${seconds}s`;
+
+                if (countdown > 0) {
+                    countdown--;
+                } else {
+                    clearInterval(countdownInterval);
+                }
+            }
+
+            let countdownInterval = setInterval(updateCountdown, 1000);
+        });
+    </script>
+</body>
+</html>
