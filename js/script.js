@@ -1,3 +1,9 @@
+import { getDatabase, ref, push, onValue } from "https://www.gstatic.com/firebasejs/10.12.1/firebase-database.js";
+
+// Obtener la base de datos de Firebase
+const database = getDatabase();
+const dbRef = ref(database, 'users');
+
 document.getElementById('registerForm').addEventListener('submit', function(event) {
     event.preventDefault();
     
@@ -14,7 +20,7 @@ document.getElementById('registerForm').addEventListener('submit', function(even
             };
 
             // Guarda el usuario en Firebase
-            firebasePush(firebaseRef(window.database, 'users'), user)
+            push(dbRef, user)
                 .then(() => {
                     console.log('Usuario guardado en Firebase');
 
@@ -23,7 +29,7 @@ document.getElementById('registerForm').addEventListener('submit', function(even
                     window.location.href = 'result.html';
                 })
                 .catch((error) => {
-                    console.error('Error al guardar en Firebase:', error);
+                    console.log('Error al guardar en Firebase:', error);
                 });
         };
         reader.readAsDataURL(photo);
@@ -34,7 +40,7 @@ document.getElementById('registerForm').addEventListener('submit', function(even
 
 function getRandomUser(currentUser) {
     return new Promise((resolve, reject) => {
-        firebaseOnValue(firebaseRef(window.database, 'users'), (snapshot) => {
+        onValue(ref(database, 'users'), (snapshot) => {
             let users = [];
             snapshot.forEach((childSnapshot) => {
                 let user = childSnapshot.val();
