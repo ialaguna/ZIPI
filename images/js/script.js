@@ -13,18 +13,18 @@ document.getElementById('registerForm').addEventListener('submit', function(even
                 timestamp: new Date().getTime() // Almacena el tiempo actual en milisegundos
             };
 
-            let users = JSON.parse(localStorage.getItem('users')) || [];
-            users.push(user);
-            localStorage.setItem('users', JSON.stringify(users));
+            // Guarda el usuario en Firebase
+            firebasePush(firebaseRef(database, 'users'), user)
+                .then(() => {
+                    console.log('Usuario guardado en Firebase');
 
-            // Filtra los usuarios que tienen menos de 24 horas
-            users = users.filter(u => (new Date().getTime() - u.timestamp) < 86400000);
-            localStorage.setItem('users', JSON.stringify(users));
-
-            let randomUser = getRandomUser(users, user);
-            localStorage.setItem('currentUser', JSON.stringify(randomUser));
-
-            window.location.href = 'result.html';
+                    // Guarda el usuario actual en localStorage
+                    localStorage.setItem('currentUser', JSON.stringify(user));
+                    window.location.href = 'result.html';
+                })
+                .catch((error) => {
+                    console.log('Error al guardar en Firebase:', error);
+                });
         };
         reader.readAsDataURL(photo);
     } else {
@@ -32,15 +32,29 @@ document.getElementById('registerForm').addEventListener('submit', function(even
     }
 });
 
-function getRandomUser(users, currentUser) {
-    if (users.length <= 1) return null;
+function getRandomUser(currentUser) {
+    return new Promise((resolve, reject) => {
+        firebaseOnValue(firebaseRef(database, 'users'), (snapshot) => {
+            let users = [];
+            snapshot.forEach((childSnapshot) => {
+                let user = childSnapshot.val();
+                if ((new Date().getTime() - user.timestamp) < 86400000) { // Filtra usuarios que tienen menos de 24 horas
+                    users.push(user);
+                }
+            });
 
-    let randomIndex;
-    do {
-        randomIndex = Math.floor(Math.random() * users.length);
-    } while (users[randomIndex].name === currentUser.name);
+            if (users.length <= 1) {
+                resolve(null);
+            } else {
+                let randomIndex;
+                do {
+                    randomIndex = Math.floor(Math.random() * users.length);
+                } while (users[randomIndex].name === currentUser.name);
 
-    return users[randomIndex];
+                resolve(users[randomIndex]);
+            }
+        });
+    });
 }
 
 // Carousel functionality
@@ -66,5 +80,41 @@ document.addEventListener('DOMContentLoaded', function() {
     showSlides(1, 0);
     showSlides(1, 1);
     showSlides(1, 2);
-});
 
+    // Cargar el usuario aleatorio al cargar la página de resultados
+    if (window.location.pathname.endsWith('result.html')) {
+        let currentUser = JSON.parse(localStorage.getItem('currentUser'));
+        if (currentUser) {
+            getRandomUser(currentUser).then(function(randomUser) {
+                if (randomUser) {
+                    document.getElementById('randomPhoto').src = randomUser.photo;
+                    document.getElementById('randomUser').textContent = randomUser.name;
+                } else {
+                    document.getElementById('resultMessage').textContent = 'No hay usuarios suficientes para jugar.';
+                }
+            });
+        } else {
+            document.getElementById('resultMessage').textContent = 'No hay usuarios suficientes para jugar.';
+        }
+
+        // Inicializar el contador
+        let countdown = 86400; // 24 horas en segundos
+        let countdownElement = document.getElementById('countdown');
+
+        function updateCountdown() {
+            let hours = Math.floor(countdown / 3600);
+            let minutes = Math.floor((countdown % 3600) / 60);
+            let seconds = countdown % 60;
+
+            countdownElement.textContent = `Tiempo restante: ${hours}h ${minutes}m ${seconds}s`;
+
+            if (countdown > 0) {
+                countdown--;
+            } else {
+                clearInterval(countdownInterval);
+            }
+        }
+
+        let countdownInterval = setInterval(updateCountdown, 1000);
+    }
+});
