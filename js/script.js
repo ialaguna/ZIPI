@@ -67,3 +67,22 @@ document.addEventListener('DOMContentLoaded', function() {
     showSlides(1, 1);
     showSlides(1, 2);
 });
+// Forzar orientación horizontal en dispositivos móviles
+function lockOrientation() {
+    if (screen.orientation && screen.orientation.lock) {
+        screen.orientation.lock('landscape')
+            .then(function() {
+                console.log('Orientación bloqueada en modo horizontal');
+            })
+            .catch(function(error) {
+                console.log('Error al bloquear la orientación:', error);
+            });
+    } else {
+        console.log('La API de orientación de pantalla no está soportada');
+    }
+}
+
+// Ejecutar al cargar la página
+document.addEventListener('DOMContentLoaded', function() {
+    lockOrientation();
+});
