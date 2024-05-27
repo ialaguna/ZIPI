@@ -23,11 +23,6 @@ document.getElementById('registerForm').addEventListener('submit', function(even
             push(dbRef, user)
                 .then(() => {
                     console.log('Usuario guardado en Firebase');
-
-                    // Guarda el usuario actual en localStorage
-                    localStorage.setItem('currentUser', JSON.stringify(user));
-                    window.location.href = 'result.html';
-                })
                 .catch((error) => {
                     console.log('Error al guardar en Firebase:', error);
                 });
