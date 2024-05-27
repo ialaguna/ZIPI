@@ -84,6 +84,12 @@ section#home h2, section#home p {
     color: #333333;
 }
 
+section#home img {
+    width: 100%;
+    max-width: 100%;
+    height: auto;
+}
+
 /* Center text in home section */
 .center-text {
     text-align: center;
@@ -306,6 +312,7 @@ footer {
     text-align: left;
     padding: 20px 0;
 }
+
 /* CSS específico para la página de resultados */
 #resultMessage {
     text-align: center;
@@ -370,6 +377,12 @@ footer {
 
     section#home p {
         font-size: 1em;
+    }
+
+    section#home img {
+        width: 100%;
+        max-width: 100%;
+        height: auto;
     }
 
     section#game h2 {
