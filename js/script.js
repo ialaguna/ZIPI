@@ -124,3 +124,6 @@ document.addEventListener('DOMContentLoaded', function() {
         let countdownInterval = setInterval(updateCountdown, 1000);
     }
 });
+updateCountdown, 1000);
+    }
+});
