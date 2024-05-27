@@ -67,4 +67,3 @@ document.addEventListener('DOMContentLoaded', function() {
     showSlides(1, 1);
     showSlides(1, 2);
 });
-
