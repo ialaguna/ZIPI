@@ -14,18 +14,17 @@ document.getElementById('registerForm').addEventListener('submit', function(even
             };
 
             // Guarda el usuario en Firebase
-            database.ref('users').push(user, function(error) {
-                if (error) {
-                    console.log('Error al guardar en Firebase:', error);
-                } else {
+            firebasePush(firebaseRef(window.database, 'users'), user)
+                .then(() => {
                     console.log('Usuario guardado en Firebase');
-                }
-            });
 
-            // Guarda el usuario actual en localStorage
-            localStorage.setItem('currentUser', JSON.stringify(user));
-
-            window.location.href = 'result.html';
+                    // Guarda el usuario actual en localStorage
+                    localStorage.setItem('currentUser', JSON.stringify(user));
+                    window.location.href = 'result.html';
+                })
+                .catch((error) => {
+                    console.log('Error al guardar en Firebase:', error);
+                });
         };
         reader.readAsDataURL(photo);
     } else {
@@ -35,9 +34,9 @@ document.getElementById('registerForm').addEventListener('submit', function(even
 
 function getRandomUser(currentUser) {
     return new Promise((resolve, reject) => {
-        database.ref('users').once('value', function(snapshot) {
+        firebaseOnValue(firebaseRef(window.database, 'users'), (snapshot) => {
             let users = [];
-            snapshot.forEach(function(childSnapshot) {
+            snapshot.forEach((childSnapshot) => {
                 let user = childSnapshot.val();
                 if ((new Date().getTime() - user.timestamp) < 86400000) { // Filtra usuarios que tienen menos de 24 horas
                     users.push(user);
@@ -54,7 +53,7 @@ function getRandomUser(currentUser) {
 
                 resolve(users[randomIndex]);
             }
-        });
+        }, { onlyOnce: true });
     });
 }
 
