@@ -13,16 +13,17 @@ document.getElementById('registerForm').addEventListener('submit', function(even
                 timestamp: new Date().getTime() // Almacena el tiempo actual en milisegundos
             };
 
-            let users = JSON.parse(localStorage.getItem('users')) || [];
-            users.push(user);
-            localStorage.setItem('users', JSON.stringify(users));
+            // Guarda el usuario en Firebase
+            database.ref('users').push(user, function(error) {
+                if (error) {
+                    console.log('Error al guardar en Firebase:', error);
+                } else {
+                    console.log('Usuario guardado en Firebase');
+                }
+            });
 
-            // Filtra los usuarios que tienen menos de 24 horas
-            users = users.filter(u => (new Date().getTime() - u.timestamp) < 86400000);
-            localStorage.setItem('users', JSON.stringify(users));
-
-            let randomUser = getRandomUser(users, user);
-            localStorage.setItem('currentUser', JSON.stringify(randomUser));
+            // Guarda el usuario actual en localStorage
+            localStorage.setItem('currentUser', JSON.stringify(user));
 
             window.location.href = 'result.html';
         };
@@ -32,15 +33,29 @@ document.getElementById('registerForm').addEventListener('submit', function(even
     }
 });
 
-function getRandomUser(users, currentUser) {
-    if (users.length <= 1) return null;
+function getRandomUser(currentUser) {
+    return new Promise((resolve, reject) => {
+        database.ref('users').once('value', function(snapshot) {
+            let users = [];
+            snapshot.forEach(function(childSnapshot) {
+                let user = childSnapshot.val();
+                if ((new Date().getTime() - user.timestamp) < 86400000) { // Filtra usuarios que tienen menos de 24 horas
+                    users.push(user);
+                }
+            });
 
-    let randomIndex;
-    do {
-        randomIndex = Math.floor(Math.random() * users.length);
-    } while (users[randomIndex].name === currentUser.name);
+            if (users.length <= 1) {
+                resolve(null);
+            } else {
+                let randomIndex;
+                do {
+                    randomIndex = Math.floor(Math.random() * users.length);
+                } while (users[randomIndex].name === currentUser.name);
 
-    return users[randomIndex];
+                resolve(users[randomIndex]);
+            }
+        });
+    });
 }
 
 // Carousel functionality
@@ -66,23 +81,41 @@ document.addEventListener('DOMContentLoaded', function() {
     showSlides(1, 0);
     showSlides(1, 1);
     showSlides(1, 2);
-});
-// Forzar orientación horizontal en dispositivos móviles
-function lockOrientation() {
-    if (screen.orientation && screen.orientation.lock) {
-        screen.orientation.lock('landscape')
-            .then(function() {
-                console.log('Orientación bloqueada en modo horizontal');
-            })
-            .catch(function(error) {
-                console.log('Error al bloquear la orientación:', error);
-            });
-    } else {
-        console.log('La API de orientación de pantalla no está soportada');
-    }
-}
 
-// Ejecutar al cargar la página
-document.addEventListener('DOMContentLoaded', function() {
-    lockOrientation();
+    // Cargar el usuario aleatorio al cargar la página de resultados
+    if (window.location.pathname.endsWith('result.html')) {
+        let currentUser = JSON.parse(localStorage.getItem('currentUser'));
+        if (currentUser) {
+            getRandomUser(currentUser).then(function(randomUser) {
+                if (randomUser) {
+                    document.getElementById('randomPhoto').src = randomUser.photo;
+                    document.getElementById('randomUser').textContent = randomUser.name;
+                } else {
+                    document.getElementById('resultMessage').textContent = 'No hay usuarios suficientes para jugar.';
+                }
+            });
+        } else {
+            document.getElementById('resultMessage').textContent = 'No hay usuarios suficientes para jugar.';
+        }
+
+        // Inicializar el contador
+        let countdown = 86400; // 24 horas en segundos
+        let countdownElement = document.getElementById('countdown');
+
+        function updateCountdown() {
+            let hours = Math.floor(countdown / 3600);
+            let minutes = Math.floor((countdown % 3600) / 60);
+            let seconds = countdown % 60;
+
+            countdownElement.textContent = `Tiempo restante: ${hours}h ${minutes}m ${seconds}s`;
+
+            if (countdown > 0) {
+                countdown--;
+            } else {
+                clearInterval(countdownInterval);
+            }
+        }
+
+        let countdownInterval = setInterval(updateCountdown, 1000);
+    }
 });
