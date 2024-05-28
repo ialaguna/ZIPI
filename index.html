@@ -19,7 +19,7 @@
   import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
   // TODO: Add SDKs for Firebase products that you want to use
   // https://firebase.google.com/docs/web/setup#available-libraries
-
+import { getDatabase, ref, push, onValue } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js";
   // Your web app's Firebase configuration
   const firebaseConfig = {
     apiKey: "AIzaSyA_v3KtWPdISsc1ClCg6AD4Ja349N0AHk4",
@@ -33,6 +33,13 @@
 
   // Initialize Firebase
   const app = initializeApp(firebaseConfig);
+  const database = getDatabase(app);
+
+    // Make database available globally
+    window.database = database;
+    window.firebaseRef = ref;
+    window.firebasePush = push;
+    window.firebaseOnValue = onValue;
 </script>
 </head>
 <body>
