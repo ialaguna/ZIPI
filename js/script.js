@@ -1,7 +1,9 @@
 import { getDatabase, ref, push, onValue } from "https://www.gstatic.com/firebasejs/10.12.1/firebase-database.js";
+import { getStorage, ref as storageRef, uploadBytes, getDownloadURL } from "https://www.gstatic.com/firebasejs/10.12.1/firebase-storage.js";
 
-// Obtener la base de datos de Firebase
+// Obtener la base de datos y el almacenamiento de Firebase
 const database = getDatabase();
+const storage = getStorage();
 const dbRef = ref(database, 'users');
 
 document.getElementById('registerForm').addEventListener('submit', function(event) {
@@ -11,28 +13,35 @@ document.getElementById('registerForm').addEventListener('submit', function(even
     let photo = document.getElementById('photo').files[0];
     
     if (username && photo) {
-        let reader = new FileReader();
-        reader.onloadend = function() {
-            let user = {
-                name: username,
-                photo: reader.result,
-                timestamp: new Date().getTime() // Almacena el tiempo actual en milisegundos
-            };
+        // Subir la foto a Firebase Storage
+        const storageReference = storageRef(storage, 'photos/' + Date.now() + '_' + photo.name);
+        uploadBytes(storageReference, photo).then((snapshot) => {
+            console.log('Foto subida a Firebase Storage');
 
-            // Guarda el usuario en Firebase
-            push(dbRef, user)
-                .then(() => {
-                    console.log('Usuario guardado en Firebase');
+            // Obtener la URL de descarga de la foto
+            getDownloadURL(snapshot.ref).then((downloadURL) => {
+                let user = {
+                    name: username,
+                    photo: downloadURL,
+                    timestamp: new Date().getTime() // Almacena el tiempo actual en milisegundos
+                };
 
-                    // Guarda el usuario actual en localStorage
-                    localStorage.setItem('currentUser', JSON.stringify(user));
-                    window.location.href = 'result.html';
-                })
-                .catch((error) => {
-                    console.log('Error al guardar en Firebase:', error);
-                });
-        };
-        reader.readAsDataURL(photo);
+                // Guarda el usuario en Firebase Realtime Database
+                push(dbRef, user)
+                    .then(() => {
+                        console.log('Usuario guardado en Firebase');
+
+                        // Guarda el usuario actual en localStorage
+                        localStorage.setItem('currentUser', JSON.stringify(user));
+                        window.location.href = 'result.html';
+                    })
+                    .catch((error) => {
+                        console.log('Error al guardar en Firebase:', error);
+                    });
+            });
+        }).catch((error) => {
+            console.log('Error al subir la foto a Firebase Storage:', error);
+        });
     } else {
         alert("Por favor, completa todos los campos antes de registrarte.");
     }
