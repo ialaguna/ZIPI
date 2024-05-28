@@ -1,9 +1,24 @@
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.1/firebase-app.js";
 import { getDatabase, ref, push, onValue } from "https://www.gstatic.com/firebasejs/10.12.1/firebase-database.js";
+import { getStorage, ref as storageRef, uploadBytes, getDownloadURL } from "https://www.gstatic.com/firebasejs/10.12.1/firebase-storage.js";
 
-// Obtener la base de datos de Firebase
-const database = getDatabase();
-const dbRef = ref(database, 'users');
+// Configurar Firebase
+const firebaseConfig = {
+    apiKey: "AIzaSyAvydCRYCLSjtn3aVb6NMiuSSigDoos_Jk",
+    authDomain: "zipi-35801.firebaseapp.com",
+    databaseURL: "https://zipi-35801-default-rtdb.firebaseio.com/users/-NyvLT7sormOiOBi-A6x", // Reemplaza con tu databaseURL real
+    projectId: "zipi-35801",
+    storageBucket: "zipi-35801.appspot.com",
+    messagingSenderId: "547970717661",
+    appId: "1:547970717661:web:8fb15b9fa5ea710bd38834",
+    measurementId: "G-LXMB9WNQRF"
+};
 
+const app = initializeApp(firebaseConfig);
+const database = getDatabase(app);
+const storage = getStorage(app);
+
+// Funcionalidad del formulario de registro
 document.getElementById('registerForm').addEventListener('submit', function(event) {
     event.preventDefault();
     
@@ -11,28 +26,35 @@ document.getElementById('registerForm').addEventListener('submit', function(even
     let photo = document.getElementById('photo').files[0];
     
     if (username && photo) {
-        let reader = new FileReader();
-        reader.onloadend = function() {
-            let user = {
-                name: username,
-                photo: reader.result,
-                timestamp: new Date().getTime() // Almacena el tiempo actual en milisegundos
-            };
+        // Subir la foto a Firebase Storage
+        const storageReference = storageRef(storage, 'photos/' + Date.now() + '_' + photo.name);
+        uploadBytes(storageReference, photo).then((snapshot) => {
+            console.log('Foto subida a Firebase Storage');
 
-            // Guarda el usuario en Firebase
-            push(dbRef, user)
-                .then(() => {
-                    console.log('Usuario guardado en Firebase');
+            // Obtener la URL de descarga de la foto
+            getDownloadURL(snapshot.ref).then((downloadURL) => {
+                let user = {
+                    name: username,
+                    photo: downloadURL,
+                    timestamp: new Date().getTime() // Almacena el tiempo actual en milisegundos
+                };
 
-                    // Guarda el usuario actual en localStorage
-                    localStorage.setItem('currentUser', JSON.stringify(user));
-                    window.location.href = 'result.html';
-                })
-                .catch((error) => {
-                    console.log('Error al guardar en Firebase:', error);
-                });
-        };
-        reader.readAsDataURL(photo);
+                // Guarda el usuario en Firebase Realtime Database
+                push(ref(database, 'users'), user)
+                    .then(() => {
+                        console.log('Usuario guardado en Firebase');
+
+                        // Guarda el usuario actual en localStorage
+                        localStorage.setItem('currentUser', JSON.stringify(user));
+                        window.location.href = 'result.html';
+                    })
+                    .catch((error) => {
+                        console.log('Error al guardar en Firebase:', error);
+                    });
+            });
+        }).catch((error) => {
+            console.log('Error al subir la foto a Firebase Storage:', error);
+        });
     } else {
         alert("Por favor, completa todos los campos antes de registrarte.");
     }
@@ -64,7 +86,7 @@ function getRandomUser(currentUser) {
 }
 
 document.addEventListener('DOMContentLoaded', function() {
-    // Carousel functionality
+    // Funcionalidad del carrusel de imágenes
     let slideIndex = [1, 1, 1];
     let slideId = ["carousel1", "carousel2", "carousel3"];
 
@@ -124,3 +146,8 @@ document.addEventListener('DOMContentLoaded', function() {
         let countdownInterval = setInterval(updateCountdown, 1000);
     }
 });
+
+// Hacer que las funciones del carrusel sean globales para el HTML
+window.plusSlides = plusSlides;
+window.showSlides = showSlides;
+
