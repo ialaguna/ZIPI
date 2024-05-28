@@ -1,16 +1,15 @@
-import { getDatabase, ref, push, onValue } from "https://www.gstatic.com/firebasejs/10.12.1/firebase-database.js";
-import { getStorage, ref as storageRef, uploadBytes, getDownloadURL } from "https://www.gstatic.com/firebasejs/10.12.1/firebase-storage.js";
+import { getDatabase, ref, push, onValue } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js";
+import { getStorage, ref as storageRef, uploadBytes, getDownloadURL } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-storage.js";
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.1/firebase-app.js";
 
 const firebaseConfig = {
-    apiKey: "AIzaSyAvydCRYCLSjtn3aVb6NMiuSSigDoos_Jk",
-    authDomain: "zipi-35801.firebaseapp.com",
-    databaseURL: "https://zipi-35801-default-rtdb.firebaseio.com/", // Reemplaza con tu databaseURL real
-    projectId: "zipi-35801",
-    storageBucket: "zipi-35801.appspot.com",
-    messagingSenderId: "547970717661",
-    appId: "1:547970717661:web:8fb15b9fa5ea710bd38834",
-    measurementId: "G-LXMB9WNQRF"
+  apiKey: "AIzaSyA_v3KtWPdISsc1ClCg6AD4Ja349N0AHk4",
+    authDomain: "zipi-73ec9.firebaseapp.com",
+    databaseURL: "https://zipi-73ec9-default-rtdb.europe-west1.firebasedatabase.app",
+    projectId: "zipi-73ec9",
+    storageBucket: "zipi-73ec9.appspot.com",
+    messagingSenderId: "265288167467",
+    appId: "1:265288167467:web:4a4e7ef9ac376449807a6e"
 };
 
 const app = initializeApp(firebaseConfig);
