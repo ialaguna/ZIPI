@@ -1,10 +1,21 @@
 import { getDatabase, ref, push, onValue } from "https://www.gstatic.com/firebasejs/10.12.1/firebase-database.js";
 import { getStorage, ref as storageRef, uploadBytes, getDownloadURL } from "https://www.gstatic.com/firebasejs/10.12.1/firebase-storage.js";
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.1/firebase-app.js";
 
-// Obtener la base de datos y el almacenamiento de Firebase
-const database = getDatabase();
-const storage = getStorage();
-const dbRef = ref(database, 'users');
+const firebaseConfig = {
+    apiKey: "AIzaSyAvydCRYCLSjtn3aVb6NMiuSSigDoos_Jk",
+    authDomain: "zipi-35801.firebaseapp.com",
+    databaseURL: "https://zipi-35801-default-rtdb.firebaseio.com/", // Reemplaza con tu databaseURL real
+    projectId: "zipi-35801",
+    storageBucket: "zipi-35801.appspot.com",
+    messagingSenderId: "547970717661",
+    appId: "1:547970717661:web:8fb15b9fa5ea710bd38834",
+    measurementId: "G-LXMB9WNQRF"
+};
+
+const app = initializeApp(firebaseConfig);
+const database = getDatabase(app);
+const storage = getStorage(app);
 
 document.getElementById('registerForm').addEventListener('submit', function(event) {
     event.preventDefault();
@@ -13,25 +24,21 @@ document.getElementById('registerForm').addEventListener('submit', function(even
     let photo = document.getElementById('photo').files[0];
     
     if (username && photo) {
-        // Subir la foto a Firebase Storage
         const storageReference = storageRef(storage, 'photos/' + Date.now() + '_' + photo.name);
         uploadBytes(storageReference, photo).then((snapshot) => {
             console.log('Foto subida a Firebase Storage');
 
-            // Obtener la URL de descarga de la foto
             getDownloadURL(snapshot.ref).then((downloadURL) => {
                 let user = {
                     name: username,
                     photo: downloadURL,
-                    timestamp: new Date().getTime() // Almacena el tiempo actual en milisegundos
+                    timestamp: new Date().getTime()
                 };
 
-                // Guarda el usuario en Firebase Realtime Database
-                push(dbRef, user)
+                push(ref(database, 'users'), user)
                     .then(() => {
                         console.log('Usuario guardado en Firebase');
 
-                        // Guarda el usuario actual en localStorage
                         localStorage.setItem('currentUser', JSON.stringify(user));
                         window.location.href = 'result.html';
                     })
@@ -53,7 +60,7 @@ function getRandomUser(currentUser) {
             let users = [];
             snapshot.forEach((childSnapshot) => {
                 let user = childSnapshot.val();
-                if ((new Date().getTime() - user.timestamp) < 86400000) { // Filtra usuarios que tienen menos de 24 horas
+                if ((new Date().getTime() - user.timestamp) < 86400000) {
                     users.push(user);
                 }
             });
@@ -73,7 +80,6 @@ function getRandomUser(currentUser) {
 }
 
 document.addEventListener('DOMContentLoaded', function() {
-    // Carousel functionality
     let slideIndex = [1, 1, 1];
     let slideId = ["carousel1", "carousel2", "carousel3"];
 
@@ -96,7 +102,6 @@ document.addEventListener('DOMContentLoaded', function() {
     showSlides(1, 1);
     showSlides(1, 2);
 
-    // Cargar el usuario aleatorio al cargar la página de resultados
     if (window.location.pathname.endsWith('result.html')) {
         let currentUser = JSON.parse(localStorage.getItem('currentUser'));
         if (currentUser) {
@@ -112,8 +117,7 @@ document.addEventListener('DOMContentLoaded', function() {
             document.getElementById('resultMessage').textContent = 'No hay usuarios suficientes para jugar.';
         }
 
-        // Inicializar el contador
-        let countdown = 86400; // 24 horas en segundos
+        let countdown = 86400;
         let countdownElement = document.getElementById('countdown');
 
         function updateCountdown() {
@@ -132,4 +136,8 @@ document.addEventListener('DOMContentLoaded', function() {
 
         let countdownInterval = setInterval(updateCountdown, 1000);
     }
+
+    window.plusSlides = plusSlides;
+    window.showSlides = showSlides;
 });
+
