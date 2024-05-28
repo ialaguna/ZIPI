@@ -23,6 +23,11 @@ document.getElementById('registerForm').addEventListener('submit', function(even
             push(dbRef, user)
                 .then(() => {
                     console.log('Usuario guardado en Firebase');
+
+                    // Guarda el usuario actual en localStorage
+                    localStorage.setItem('currentUser', JSON.stringify(user));
+                    window.location.href = 'result.html';
+                })
                 .catch((error) => {
                     console.log('Error al guardar en Firebase:', error);
                 });
@@ -35,7 +40,7 @@ document.getElementById('registerForm').addEventListener('submit', function(even
 
 function getRandomUser(currentUser) {
     return new Promise((resolve, reject) => {
-        onValue(ref(database, 'users'), (snapshot) => {
+        onValue(dbRef, (snapshot) => {
             let users = [];
             snapshot.forEach((childSnapshot) => {
                 let user = childSnapshot.val();
@@ -117,8 +122,5 @@ document.addEventListener('DOMContentLoaded', function() {
         }
 
         let countdownInterval = setInterval(updateCountdown, 1000);
-    }
-});
-updateCountdown, 1000);
     }
 });
