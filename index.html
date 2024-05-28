@@ -14,35 +14,26 @@
             background: url('images/header.jpg') no-repeat center center/cover;
         }
     </style>
-    <script type="module">
-        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.1/firebase-app.js";
-        import { getDatabase, ref, push, onValue } from "https://www.gstatic.com/firebasejs/10.12.1/firebase-database.js";
-        import { getStorage, ref as storageRef, uploadBytes, getDownloadURL } from "https://www.gstatic.com/firebasejs/10.12.1/firebase-storage.js";
+   <script type="module">
+  // Import the functions you need from the SDKs you need
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+  // TODO: Add SDKs for Firebase products that you want to use
+  // https://firebase.google.com/docs/web/setup#available-libraries
 
-        const firebaseConfig = {
-            apiKey: "AIzaSyAvydCRYCLSjtn3aVb6NMiuSSigDoos_Jk",
-            authDomain: "https://zipi-35801-default-rtdb.firebaseio.com/",
-            databaseURL: "https://zipi-35801.firebaseio.com",
-            projectId: "zipi-35801",
-            storageBucket: "zipi-35801.appspot.com",
-            messagingSenderId: "547970717661",
-            appId: "1:547970717661:web:8fb15b9fa5ea710bd38834",
-            measurementId: "G-LXMB9WNQRF"
-        };
+  // Your web app's Firebase configuration
+  const firebaseConfig = {
+    apiKey: "AIzaSyA_v3KtWPdISsc1ClCg6AD4Ja349N0AHk4",
+    authDomain: "zipi-73ec9.firebaseapp.com",
+    databaseURL: "https://zipi-73ec9-default-rtdb.europe-west1.firebasedatabase.app",
+    projectId: "zipi-73ec9",
+    storageBucket: "zipi-73ec9.appspot.com",
+    messagingSenderId: "265288167467",
+    appId: "1:265288167467:web:4a4e7ef9ac376449807a6e"
+  };
 
-        const app = initializeApp(firebaseConfig);
-        const database = getDatabase(app);
-        const storage = getStorage(app);
-
-        window.database = database;
-        window.storage = storage;
-        window.firebaseRef = ref;
-        window.firebasePush = push;
-        window.firebaseOnValue = onValue;
-        window.storageRef = storageRef;
-        window.uploadBytes = uploadBytes;
-        window.getDownloadURL = getDownloadURL;
-    </script>
+  // Initialize Firebase
+  const app = initializeApp(firebaseConfig);
+</script>
 </head>
 <body>
     <header>
