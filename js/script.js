@@ -63,26 +63,26 @@ function getRandomUser(currentUser) {
     });
 }
 
-// Carousel functionality
-let slideIndex = [1, 1, 1];
-let slideId = ["carousel1", "carousel2", "carousel3"];
-
-function plusSlides(n, no) {
-    showSlides(slideIndex[no] += n, no);
-}
-
-function showSlides(n, no) {
-    let i;
-    let x = document.getElementById(slideId[no]).getElementsByClassName("carousel-image");
-    if (n > x.length) {slideIndex[no] = 1}
-    if (n < 1) {slideIndex[no] = x.length}
-    for (i = 0; i < x.length; i++) {
-        x[i].style.display = "none";  
-    }
-    x[slideIndex[no]-1].style.display = "block";  
-}
-
 document.addEventListener('DOMContentLoaded', function() {
+    // Carousel functionality
+    let slideIndex = [1, 1, 1];
+    let slideId = ["carousel1", "carousel2", "carousel3"];
+
+    function plusSlides(n, no) {
+        showSlides(slideIndex[no] += n, no);
+    }
+
+    function showSlides(n, no) {
+        let i;
+        let x = document.getElementById(slideId[no]).getElementsByClassName("carousel-image");
+        if (n > x.length) {slideIndex[no] = 1}
+        if (n < 1) {slideIndex[no] = x.length}
+        for (i = 0; i < x.length; i++) {
+            x[i].style.display = "none";  
+        }
+        x[slideIndex[no]-1].style.display = "block";  
+    }
+
     showSlides(1, 0);
     showSlides(1, 1);
     showSlides(1, 2);
