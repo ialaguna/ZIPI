@@ -7,44 +7,18 @@
     <link rel="stylesheet" href="css/styles.css">
     <style>
         body {
-            background: url('images/background.jpg') no-repeat center center fixed; 
+            background: url('images/background.jpg') no-repeat center center fixed;
             background-size: cover;
         }
         header {
             background: url('images/header.jpg') no-repeat center center/cover;
         }
     </style>
-    <script type="module">
-        // Import the functions you need from the SDKs you need
-        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.1/firebase-app.js";
-        import { getDatabase, ref, onValue } from "https://www.gstatic.com/firebasejs/10.12.1/firebase-database.js";
-
-        // Your web app's Firebase configuration
-        const firebaseConfig = {
-            apiKey: "AIzaSyAvydCRYCLSjtn3aVb6NMiuSSigDoos_Jk",
-            authDomain: "zipi-35801.firebaseapp.com",
-            databaseURL: "https://zipi-35801-default-rtdb.firebaseio.com/users/-NyvLT7sormOiOBi-A6x",
-            projectId: "zipi-35801",
-            storageBucket: "zipi-35801.appspot.com",
-            messagingSenderId: "547970717661",
-            appId: "1:547970717661:web:8fb15b9fa5ea710bd38834",
-            measurementId: "G-LXMB9WNQRF"
-        };
-
-        // Initialize Firebase
-        const app = initializeApp(firebaseConfig);
-        const database = getDatabase(app);
-
-        // Make database available globally
-        window.database = database;
-        window.firebaseRef = ref;
-        window.firebaseOnValue = onValue;
-    </script>
 </head>
 <body>
     <header>
         <div class="container">
-            <h1> </h1>
+            <h1>Resultado del Juego</h1>
             <nav>
                 <ul>
                     <li><a href="index.html#home">Inicio</a></li>
