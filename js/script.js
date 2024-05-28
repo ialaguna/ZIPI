@@ -40,7 +40,7 @@ document.getElementById('registerForm').addEventListener('submit', function(even
 
 function getRandomUser(currentUser) {
     return new Promise((resolve, reject) => {
-        onValue(dbRef, (snapshot) => {
+        onValue(ref(database, 'users'), (snapshot) => {
             let users = [];
             snapshot.forEach((childSnapshot) => {
                 let user = childSnapshot.val();
