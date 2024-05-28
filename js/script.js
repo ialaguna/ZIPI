@@ -1,24 +1,11 @@
-import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.1/firebase-app.js";
 import { getDatabase, ref, push, onValue } from "https://www.gstatic.com/firebasejs/10.12.1/firebase-database.js";
 import { getStorage, ref as storageRef, uploadBytes, getDownloadURL } from "https://www.gstatic.com/firebasejs/10.12.1/firebase-storage.js";
 
-// Configurar Firebase
-const firebaseConfig = {
-    apiKey: "AIzaSyAvydCRYCLSjtn3aVb6NMiuSSigDoos_Jk",
-    authDomain: "zipi-35801.firebaseapp.com",
-    databaseURL: "https://zipi-35801-default-rtdb.firebaseio.com/users/-NyvLT7sormOiOBi-A6x", // Reemplaza con tu databaseURL real
-    projectId: "zipi-35801",
-    storageBucket: "zipi-35801.appspot.com",
-    messagingSenderId: "547970717661",
-    appId: "1:547970717661:web:8fb15b9fa5ea710bd38834",
-    measurementId: "G-LXMB9WNQRF"
-};
+// Obtener la base de datos y el almacenamiento de Firebase
+const database = getDatabase();
+const storage = getStorage();
+const dbRef = ref(database, 'users');
 
-const app = initializeApp(firebaseConfig);
-const database = getDatabase(app);
-const storage = getStorage(app);
-
-// Funcionalidad del formulario de registro
 document.getElementById('registerForm').addEventListener('submit', function(event) {
     event.preventDefault();
     
@@ -40,7 +27,7 @@ document.getElementById('registerForm').addEventListener('submit', function(even
                 };
 
                 // Guarda el usuario en Firebase Realtime Database
-                push(ref(database, 'users'), user)
+                push(dbRef, user)
                     .then(() => {
                         console.log('Usuario guardado en Firebase');
 
@@ -86,7 +73,7 @@ function getRandomUser(currentUser) {
 }
 
 document.addEventListener('DOMContentLoaded', function() {
-    // Funcionalidad del carrusel de imágenes
+    // Carousel functionality
     let slideIndex = [1, 1, 1];
     let slideId = ["carousel1", "carousel2", "carousel3"];
 
@@ -146,8 +133,3 @@ document.addEventListener('DOMContentLoaded', function() {
         let countdownInterval = setInterval(updateCountdown, 1000);
     }
 });
-
-// Hacer que las funciones del carrusel sean globales para el HTML
-window.plusSlides = plusSlides;
-window.showSlides = showSlides;
-
