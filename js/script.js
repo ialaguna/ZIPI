@@ -16,12 +16,6 @@ const app = initializeApp(firebaseConfig);
 const database = getDatabase(app);
 const storage = getStorage(app);
 
-document.getElementById('registerForm').addEventListener('submit', function(event) {
-    event.preventDefault();
-    
-    let username = document.getElementById('username').value;
-    let photo = document.getElementById('photo').files[0];
-  
 document.addEventListener('DOMContentLoaded', function() {
     let slideIndex = [1, 1, 1];
     let slideId = ["carousel1", "carousel2", "carousel3"];
@@ -29,38 +23,6 @@ document.addEventListener('DOMContentLoaded', function() {
     function plusSlides(n, no) {
         showSlides(slideIndex[no] += n, no);
     }
-
-  
-    if (username && photo) {
-        const storageReference = storageRef(storage, 'photos/' + Date.now() + '_' + photo.name);
-        uploadBytes(storageReference, photo).then((snapshot) => {
-            console.log('Foto subida a Firebase Storage');
-
-            getDownloadURL(snapshot.ref).then((downloadURL) => {
-                let user = {
-                    name: username,
-                    photo: downloadURL,
-                    timestamp: new Date().getDate()
-                };
-
-                push(ref(database, 'users'), user)
-                    .then(() => {
-                        console.log('Usuario guardado en Firebase');
-
-                        localStorage.setItem('currentUser', JSON.stringify(user));
-                        window.location.href = 'result.html';
-                    })
-                    .catch((error) => {
-                        console.log('Error al guardar en Firebase:', error);
-                    });
-            });
-        }).catch((error) => {
-            console.log('Error al subir la foto a Firebase Storage:', error);
-        });
-    } else {
-        alert("Por favor, completa todos los campos antes de registrarte.");
-    }
-});
 
 function getRandomUser(currentUser) {
     return new Promise((resolve, reject) => {
@@ -72,6 +34,14 @@ function getRandomUser(currentUser) {
                     users.push(user);
                 }
             });
+          
+          document.addEventListener('DOMContentLoaded', function() {
+    let slideIndex = [1, 1, 1];
+    let slideId = ["carousel1", "carousel2", "carousel3"];
+
+    function plusSlides(n, no) {
+        showSlides(slideIndex[no] += n, no);
+    }
 
             if (users.length <= 1) {
                 resolve(null);
