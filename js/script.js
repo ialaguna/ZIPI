@@ -15,10 +15,10 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const database = getDatabase(app);
 const storage = getStorage(app);
-print('registerForm'); 
+
 document.getElementById('registerForm').addEventListener('submit', function(event) {
     event.preventDefault();
-    
+   print('registerForm');  
     let username = document.getElementById('username').value;
     let photo = document.getElementById('photo').files[0];
     
