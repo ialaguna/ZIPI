@@ -22,34 +22,31 @@ const storage = getStorage(app);
 
 // Esperar a que el DOM esté completamente cargado antes de ejecutar el código
 document.addEventListener('DOMContentLoaded', function() {
+    // Obtener el formulario de registro por su ID
     const registerForm = document.getElementById('registerForm');
-    
-    // Mensaje de depuración para verificar si el formulario existe en el DOM
+
+    // Verificar si el formulario de registro existe en el DOM
     if (registerForm) {
-        console.log("Formulario de registro encontrado.");
-        
         // Añadir un event listener para manejar el evento 'submit' del formulario
         registerForm.addEventListener('submit', function(event) {
-            event.preventDefault();  // Prevenir el comportamiento por defecto del formulario (recargar la página)
+            event.preventDefault(); // Prevenir el comportamiento por defecto del formulario
 
             // Obtener los valores del nombre de usuario y la foto del formulario
             let username = document.getElementById('username').value;
             let photo = document.getElementById('photo').files[0];
 
-            // Verificar que el nombre de usuario y la foto estén presentes
+            // Verificar si el nombre de usuario y la foto están presentes
             if (username && photo) {
-                console.log('Nombre de usuario y foto presentes.');
-
-                // Crear una referencia en Firebase Storage con un nombre único basado en la fecha y hora actual
+                // Crear una referencia de almacenamiento para la foto
                 const storageReference = storageRef(storage, 'photos/' + Date.now() + '_' + photo.name);
-
+                
                 // Subir la foto a Firebase Storage
                 uploadBytes(storageReference, photo).then((snapshot) => {
                     console.log('Foto subida a Firebase Storage');
 
                     // Obtener la URL de descarga de la foto subida
                     getDownloadURL(snapshot.ref).then((downloadURL) => {
-                        // Crear un objeto de usuario con el nombre, la URL de la foto y la marca de tiempo
+                        // Crear un objeto de usuario con el nombre, la foto y la marca de tiempo
                         let user = {
                             name: username,
                             photo: downloadURL,
@@ -78,8 +75,6 @@ document.addEventListener('DOMContentLoaded', function() {
                 alert("Por favor, completa todos los campos antes de registrarte.");
             }
         });
-    } else {
-        console.log("Formulario de registro no encontrado en el DOM.");
     }
 });
 
