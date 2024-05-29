@@ -78,4 +78,95 @@ document.addEventListener('DOMContentLoaded', function() {
     } else {
         console.log("Formulario de registro no encontrado en el DOM.");
     }
+
+    // Funciones del carrusel
+    let slideIndex = [1, 1, 1];
+    const slideId = ["carousel1", "carousel2", "carousel3"];
+
+    window.plusSlides = function(n, no) {
+        showSlides(slideIndex[no] += n, no);
+    };
+
+    function showSlides(n, no) {
+        let i;
+        let x = document.getElementById(slideId[no]).getElementsByClassName("carousel-image");
+        if (n > x.length) { slideIndex[no] = 1 }
+        if (n < 1) { slideIndex[no] = x.length }
+        for (i = 0; i < x.length; i++) {
+            x[i].style.display = "none";
+        }
+        x[slideIndex[no] - 1].style.display = "block";
+    }
+
+    // Inicializar los carruseles
+    showSlides(1, 0);
+    showSlides(1, 1);
+    showSlides(1, 2);
+
+    if (window.location.pathname.endsWith('result.html')) {
+        let currentUser = JSON.parse(localStorage.getItem('currentUser'));
+        if (currentUser) {
+            getRandomUser(currentUser).then(function(randomUser) {
+                if (randomUser) {
+                    document.getElementById('randomPhoto').src = randomUser.photo;
+                    document.getElementById('randomUser').textContent = randomUser.name;
+                } else {
+                    document.getElementById('resultMessage').textContent = 'No hay usuarios suficientes para jugar.';
+                }
+            });
+        } else {
+            document.getElementById('resultMessage').textContent = 'No hay usuarios suficientes para jugar.';
+        }
+
+        let countdown = 86400;
+        let countdownElement = document.getElementById('countdown');
+
+        function updateCountdown() {
+            let hours = Math.floor(countdown / 3600);
+            let minutes = Math.floor((countdown % 3600) / 60);
+            let seconds = countdown % 60;
+
+            countdownElement.textContent = `Tiempo restante: ${hours}h ${minutes}m ${seconds}s`;
+
+            if (countdown > 0) {
+                countdown--;
+            } else {
+                clearInterval(countdownInterval);
+            }
+        }
+
+        let countdownInterval = setInterval(updateCountdown, 1000);
+    }
 });
+
+// Función para obtener un usuario aleatorio de Firebase Database
+function getRandomUser(currentUser) {
+    return new Promise((resolve, reject) => {
+        // Leer los datos de 'users' en Firebase Database
+        onValue(ref(database, 'users'), (snapshot) => {
+            let users = [];
+
+            // Iterar sobre cada snapshot hijo
+            snapshot.forEach((childSnapshot) => {
+                let user = childSnapshot.val();
+                
+                // Solo agregar usuarios que se registraron en las últimas 24 horas
+                if ((new Date().getTime() - user.timestamp) < 86400000) {
+                    users.push(user);
+                }
+            });
+
+            // Resolver con un usuario aleatorio diferente al usuario actual
+            if (users.length <= 1) {
+                resolve(null);
+            } else {
+                let randomIndex;
+                do {
+                    randomIndex = Math.floor(Math.random() * users.length);
+                } while (users[randomIndex].name === currentUser.name);
+
+                resolve(users[randomIndex]);
+            }
+        }, { onlyOnce: true });
+    });
+}
