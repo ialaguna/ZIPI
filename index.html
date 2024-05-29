@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, orientation=landscape">
     <title>Zipi - El Mejor Zurracapote</title>
-    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="styles.css">
     <style>
         body {
             background: url('images/background.jpg') no-repeat center center fixed;
@@ -14,7 +14,7 @@
             background: url('images/header.jpg') no-repeat center center/cover;
         }
     </style>
- <script type="module">
+   <script type="module">
   // Import the functions you need from the SDKs you need
   import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
   // TODO: Add SDKs for Firebase products that you want to use
@@ -31,17 +31,20 @@ import { getDatabase, ref, push, onValue } from "https://www.gstatic.com/firebas
     appId: "1:265288167467:web:4a4e7ef9ac376449807a6e"
   };
 
-  // Initialize Firebase
-  const app = initializeApp(firebaseConfig);
-  const database = getDatabase(app);
+        const app = initializeApp(firebaseConfig);
+        const database = getDatabase(app);
+        const storage = getStorage(app);
 
-    // Make database available globally
-    window.database = database;
-    window.firebaseRef = ref;
-    window.firebasePush = push;
-    window.firebaseOnValue = onValue;
-     
-      document.addEventListener('DOMContentLoaded', function() {
+        window.database = database;
+        window.storage = storage;
+        window.firebaseRef = ref;
+        window.firebasePush = push;
+        window.firebaseOnValue = onValue;
+        window.storageRef = storageRef;
+        window.uploadBytes = uploadBytes;
+        window.getDownloadURL = getDownloadURL;
+
+        document.addEventListener('DOMContentLoaded', function() {
             const registerForm = document.getElementById('registerForm');
             if (registerForm) {
                 registerForm.addEventListener('submit', function(event) {
@@ -82,12 +85,12 @@ import { getDatabase, ref, push, onValue } from "https://www.gstatic.com/firebas
                 });
             }
         });
-</script>
+    </script>
 </head>
 <body>
     <header>
         <div class="container">
-            <h1> </h1>
+            <h1>Zipi</h1>
             <nav>
                 <ul>
                     <li><a href="#home">Inicio</a></li>
@@ -210,6 +213,7 @@ import { getDatabase, ref, push, onValue } from "https://www.gstatic.com/firebas
         </div>
     </footer>
 
-    <script src="js/script.js" type="module"></script>
+    <script src="script.js" type="module"></script>
 </body>
 </html>
+
