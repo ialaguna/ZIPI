@@ -20,7 +20,7 @@ const storage = getStorage(app);
 
 document.addEventListener('DOMContentLoaded', function() {
     const registerForm = document.getElementById('registerForm');
-
+    
     // Mensaje de depuración para verificar si el formulario existe en el DOM
     if (registerForm) {
         console.log("Formulario de registro encontrado.");
@@ -83,7 +83,6 @@ document.addEventListener('DOMContentLoaded', function() {
     let slideIndex = [1, 1, 1];
     const slideId = ["carousel1", "carousel2", "carousel3"];
 
-    // Definir la función plusSlides en el alcance global
     window.plusSlides = function(n, no) {
         showSlides(slideIndex[no] += n, no);
     };
@@ -139,35 +138,3 @@ document.addEventListener('DOMContentLoaded', function() {
         let countdownInterval = setInterval(updateCountdown, 1000);
     }
 });
-
-// Función para obtener un usuario aleatorio de Firebase Database
-function getRandomUser(currentUser) {
-    return new Promise((resolve, reject) => {
-        // Leer los datos de 'users' en Firebase Database
-        onValue(ref(database, 'users'), (snapshot) => {
-            let users = [];
-
-            // Iterar sobre cada snapshot hijo
-            snapshot.forEach((childSnapshot) => {
-                let user = childSnapshot.val();
-                
-                // Solo agregar usuarios que se registraron en las últimas 24 horas
-                if ((new Date().getTime() - user.timestamp) < 86400000) {
-                    users.push(user);
-                }
-            });
-
-            // Resolver con un usuario aleatorio diferente al usuario actual
-            if (users.length <= 1) {
-                resolve(null);
-            } else {
-                let randomIndex;
-                do {
-                    randomIndex = Math.floor(Math.random() * users.length);
-                } while (users[randomIndex].name === currentUser.name);
-
-                resolve(users[randomIndex]);
-            }
-        }, { onlyOnce: true });
-    });
-}
