@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, orientation=landscape">
     <title>Zipi - El Mejor Zurracapote</title>
-      <link rel="stylesheet" href="styles.css?v=1.0">
+    <link rel="stylesheet" href="css/styles.css">
     <style>
         body {
             background: url('images/background.jpg') no-repeat center center fixed;
@@ -30,66 +30,22 @@ import { getDatabase, ref, push, onValue } from "https://www.gstatic.com/firebas
     messagingSenderId: "265288167467",
     appId: "1:265288167467:web:4a4e7ef9ac376449807a6e"
   };
-        const app = initializeApp(firebaseConfig);
-        const database = getDatabase(app);
-        const storage = getStorage(app);
 
-        window.database = database;
-        window.storage = storage;
-        window.firebaseRef = ref;
-        window.firebasePush = push;
-        window.firebaseOnValue = onValue;
-        window.storageRef = storageRef;
-        window.uploadBytes = uploadBytes;
-        window.getDownloadURL = getDownloadURL;
+  // Initialize Firebase
+  const app = initializeApp(firebaseConfig);
+  const database = getDatabase(app);
 
-        document.addEventListener('DOMContentLoaded', function() {
-            const registerForm = document.getElementById('registerForm');
-            if (registerForm) {
-                registerForm.addEventListener('submit', function(event) {
-                    event.preventDefault();
-
-                    let username = document.getElementById('username').value;
-                    let photo = document.getElementById('photo').files[0];
-
-                    if (username && photo) {
-                        const storageReference = storageRef(storage, 'photos/' + Date.now() + '_' + photo.name);
-                        uploadBytes(storageReference, photo).then((snapshot) => {
-                            console.log('Foto subida a Firebase Storage');
-
-                            getDownloadURL(snapshot.ref).then((downloadURL) => {
-                                let user = {
-                                    name: username,
-                                    photo: downloadURL,
-                                    timestamp: new Date().getTime()
-                                };
-
-                                push(ref(database, 'users'), user)
-                                    .then(() => {
-                                        console.log('Usuario guardado en Firebase');
-
-                                        localStorage.setItem('currentUser', JSON.stringify(user));
-                                        window.location.href = 'result.html';
-                                    })
-                                    .catch((error) => {
-                                        console.log('Error al guardar en Firebase:', error);
-                                    });
-                            });
-                        }).catch((error) => {
-                            console.log('Error al subir la foto a Firebase Storage:', error);
-                        });
-                    } else {
-                        alert("Por favor, completa todos los campos antes de registrarte.");
-                    }
-                });
-            }
-        });
-    </script>
+    // Make database available globally
+    window.database = database;
+    window.firebaseRef = ref;
+    window.firebasePush = push;
+    window.firebaseOnValue = onValue;
+</script>
 </head>
 <body>
     <header>
         <div class="container">
-            <h1>Zipi</h1>
+            <h1> </h1>
             <nav>
                 <ul>
                     <li><a href="#home">Inicio</a></li>
@@ -212,6 +168,6 @@ import { getDatabase, ref, push, onValue } from "https://www.gstatic.com/firebas
         </div>
     </footer>
 
-    <script src="script.js" type="module"></script>
+    <script src="js/script.js" type="module"></script>
 </body>
 </html>
