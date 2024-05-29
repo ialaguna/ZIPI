@@ -1,23 +1,26 @@
 // Importar las funciones necesarias de los SDKs de Firebase
-import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
-import { getDatabase, ref, push, onValue } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js";
-import { getStorage, ref as storageRef, uploadBytes, getDownloadURL } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-storage.js";
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.1/firebase-app.js";
+import { getDatabase, ref, push, onValue } from "https://www.gstatic.com/firebasejs/10.12.1/firebase-database.js";
+import { getStorage, ref as storageRef, uploadBytes, getDownloadURL } from "https://www.gstatic.com/firebasejs/10.12.1/firebase-storage.js";
 
 // Configurar Firebase con los parámetros del proyecto
 const firebaseConfig = {
-    apiKey: "AIzaSyA_v3KtWPdISsc1ClCg6AD4Ja349N0AHk4",
-    authDomain: "zipi-73ec9.firebaseapp.com",
-    databaseURL: "https://zipi-73ec9-default-rtdb.europe-west1.firebasedatabase.app",
-    projectId: "zipi-73ec9",
-    storageBucket: "zipi-73ec9.appspot.com",
-    messagingSenderId: "265288167467",
-    appId: "1:265288167467:web:4a4e7ef9ac376449807a6e"
+    apiKey: "AIzaSyAvydCRYCLSjtn3aVb6NMiuSSigDoos_Jk",
+    authDomain: "zipi-35801.firebaseapp.com",
+    databaseURL: "https://zipi-35801.firebaseio.com",
+    projectId: "zipi-35801",
+    storageBucket: "zipi-35801.appspot.com",
+    messagingSenderId: "547970717661",
+    appId: "1:547970717661:web:8fb15b9fa5ea710bd38834",
+    measurementId: "G-LXMB9WNQRF"
 };
 
+// Inicializar la aplicación de Firebase
 const app = initializeApp(firebaseConfig);
 const database = getDatabase(app);
 const storage = getStorage(app);
 
+// Esperar a que el DOM esté completamente cargado antes de ejecutar el código
 document.addEventListener('DOMContentLoaded', function() {
     const registerForm = document.getElementById('registerForm');
     
@@ -78,6 +81,83 @@ document.addEventListener('DOMContentLoaded', function() {
     } else {
         console.log("Formulario de registro no encontrado en el DOM.");
     }
+});
+
+// Función para obtener un usuario aleatorio de Firebase Database
+function getRandomUser(currentUser) {
+    return new Promise((resolve, reject) => {
+        // Leer los datos de 'users' en Firebase Database
+        onValue(ref(database, 'users'), (snapshot) => {
+            let users = [];
+
+            // Iterar sobre cada snapshot hijo
+            snapshot.forEach((childSnapshot) => {
+                let user = childSnapshot.val();
+                
+                // Solo agregar usuarios que se registraron en las últimas 24 horas
+                if ((new Date().getTime() - user.timestamp) < 86400000) {
+                    users.push(user);
+                }
+            });
+
+            // Resolver con un usuario aleatorio diferente al usuario actual
+            if (users.length <= 1) {
+                resolve(null);
+            } else {
+                let randomIndex;
+                do {
+                    randomIndex = Math.floor(Math.random() * users.length);
+                } while (users[randomIndex].name === currentUser.name);
+
+                resolve(users[randomIndex]);
+            }
+        }, { onlyOnce: true });
+    });
+}
+
+// Esperar a que el DOM esté completamente cargado antes de ejecutar el código
+document.addEventListener('DOMContentLoaded', function() {
+    // Verificar si estamos en la página de resultados
+    if (window.location.pathname.endsWith('result.html')) {
+        // Obtener el usuario actual del almacenamiento local
+        const currentUser = JSON.parse(localStorage.getItem('currentUser'));
+
+        // Verificar si el usuario actual existe
+        if (currentUser) {
+            // Obtener un usuario aleatorio
+            getRandomUser(currentUser).then(function(randomUser) {
+                if (randomUser) {
+                    // Mostrar la foto y el nombre del usuario aleatorio
+                    document.getElementById('randomPhoto').src = randomUser.photo;
+                    document.getElementById('randomUser').textContent = randomUser.name;
+                } else {
+                    document.getElementById('resultMessage').textContent = 'No hay usuarios suficientes para jugar.';
+                }
+            });
+        } else {
+            document.getElementById('resultMessage').textContent = 'No hay usuarios suficientes para jugar.';
+        }
+
+        // Configurar el contador de 24 horas
+        let countdown = 86400;
+        const countdownElement = document.getElementById('countdown');
+
+        function updateCountdown() {
+            let hours = Math.floor(countdown / 3600);
+            let minutes = Math.floor((countdown % 3600) / 60);
+            let seconds = countdown % 60;
+
+            countdownElement.textContent = `Tiempo restante: ${hours}h ${minutes}m ${seconds}s`;
+
+            if (countdown > 0) {
+                countdown--;
+            } else {
+                clearInterval(countdownInterval);
+            }
+        }
+
+        const countdownInterval = setInterval(updateCountdown, 1000);
+    }
 
     // Funciones del carrusel
     let slideIndex = [1, 1, 1];
@@ -102,39 +182,4 @@ document.addEventListener('DOMContentLoaded', function() {
     showSlides(1, 0);
     showSlides(1, 1);
     showSlides(1, 2);
-
-    if (window.location.pathname.endsWith('result.html')) {
-        let currentUser = JSON.parse(localStorage.getItem('currentUser'));
-        if (currentUser) {
-            getRandomUser(currentUser).then(function(randomUser) {
-                if (randomUser) {
-                    document.getElementById('randomPhoto').src = randomUser.photo;
-                    document.getElementById('randomUser').textContent = randomUser.name;
-                } else {
-                    document.getElementById('resultMessage').textContent = 'No hay usuarios suficientes para jugar.';
-                }
-            });
-        } else {
-            document.getElementById('resultMessage').textContent = 'No hay usuarios suficientes para jugar.';
-        }
-
-        let countdown = 86400;
-        let countdownElement = document.getElementById('countdown');
-
-        function updateCountdown() {
-            let hours = Math.floor(countdown / 3600);
-            let minutes = Math.floor((countdown % 3600) / 60);
-            let seconds = countdown % 60;
-
-            countdownElement.textContent = `Tiempo restante: ${hours}h ${minutes}m ${seconds}s`;
-
-            if (countdown > 0) {
-                countdown--;
-            } else {
-                clearInterval(countdownInterval);
-            }
-        }
-
-        let countdownInterval = setInterval(updateCountdown, 1000);
-    }
 });
