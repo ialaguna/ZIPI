@@ -15,7 +15,7 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const database = getDatabase(app);
 const storage = getStorage(app);
-print = registerForm; 
+print('registerForm'); 
 document.getElementById('registerForm').addEventListener('submit', function(event) {
     event.preventDefault();
     
