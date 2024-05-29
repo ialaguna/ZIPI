@@ -21,7 +21,16 @@ document.getElementById('registerForm').addEventListener('submit', function(even
     
     let username = document.getElementById('username').value;
     let photo = document.getElementById('photo').files[0];
-    
+  
+document.addEventListener('DOMContentLoaded', function() {
+    let slideIndex = [1, 1, 1];
+    let slideId = ["carousel1", "carousel2", "carousel3"];
+
+    function plusSlides(n, no) {
+        showSlides(slideIndex[no] += n, no);
+    }
+
+  
     if (username && photo) {
         const storageReference = storageRef(storage, 'photos/' + Date.now() + '_' + photo.name);
         uploadBytes(storageReference, photo).then((snapshot) => {
@@ -77,14 +86,6 @@ function getRandomUser(currentUser) {
         }, { onlyOnce: true });
     });
 }
-
-document.addEventListener('DOMContentLoaded', function() {
-    let slideIndex = [1, 1, 1];
-    let slideId = ["carousel1", "carousel2", "carousel3"];
-
-    function plusSlides(n, no) {
-        showSlides(slideIndex[no] += n, no);
-    }
 
     function showSlides(n, no) {
         let i;
