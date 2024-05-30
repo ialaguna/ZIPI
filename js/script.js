@@ -19,9 +19,10 @@ const database = getDatabase(app);
 const storage = getStorage(app);
 
 document.addEventListener('DOMContentLoaded', function() {
+    console.log("DOM completamente cargado y analizado");
     const registerForm = document.getElementById('registerForm');
+    console.log("registerForm:", registerForm); // Mensaje de depuración
 
-    // Mensaje de depuración para verificar si el formulario existe en el DOM
     if (registerForm) {
         console.log("Formulario de registro encontrado.");
 
@@ -80,8 +81,8 @@ document.addEventListener('DOMContentLoaded', function() {
     function showSlides(n, no) {
         let i;
         let x = document.getElementById(slideId[no]).getElementsByClassName("carousel-image");
-        if (n > x.length) { slideIndex[no] = 1; }
-        if (n < 1) { slideIndex[no] = x.length; }
+        if (n > x.length) { slideIndex[no] = 1 }
+        if (n < 1) { slideIndex[no] = x.length }
         for (i = 0; i < x.length; i++) {
             x[i].style.display = "none";
         }
