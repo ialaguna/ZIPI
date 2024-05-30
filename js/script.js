@@ -1,9 +1,11 @@
+// Importar las funciones necesarias de los SDKs de Firebase
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
 import { getDatabase, ref, push, onValue } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js";
 import { getStorage, ref as storageRef, uploadBytes, getDownloadURL } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-storage.js";
-import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
 
+// Configurar Firebase con los parámetros del proyecto
 const firebaseConfig = {
-  apiKey: "AIzaSyA_v3KtWPdISsc1ClCg6AD4Ja349N0AHk4",
+    apiKey: "AIzaSyA_v3KtWPdISsc1ClCg6AD4Ja349N0AHk4",
     authDomain: "zipi-73ec9.firebaseapp.com",
     databaseURL: "https://zipi-73ec9-default-rtdb.europe-west1.firebasedatabase.app",
     projectId: "zipi-73ec9",
@@ -16,86 +18,77 @@ const app = initializeApp(firebaseConfig);
 const database = getDatabase(app);
 const storage = getStorage(app);
 
-document.getElementById('registerForm').addEventListener('submit', function(event) {
-    event.preventDefault();
-    let username = document.getElementById('username').value;
-    let photo = document.getElementById('photo').files[0];
-    
-    if (username && photo) {
-        const storageReference = storageRef(storage, 'photos/' + Date.now() + '_' + photo.name);
-        uploadBytes(storageReference, photo).then((snapshot) => {
-            console.log('Foto subida a Firebase Storage');
+document.addEventListener('DOMContentLoaded', function() {
+    const registerForm = document.getElementById('registerForm');
 
-            getDownloadURL(snapshot.ref).then((downloadURL) => {
-                let user = {
-                    name: username,
-                    photo: downloadURL,
-                    timestamp: new Date().getDate()
-                };
+    // Mensaje de depuración para verificar si el formulario existe en el DOM
+    if (registerForm) {
+        console.log("Formulario de registro encontrado.");
 
-                push(ref(database, 'users'), user)
-                    .then(() => {
-                        console.log('Usuario guardado en Firebase');
+        registerForm.addEventListener('submit', function(event) {
+            event.preventDefault();
 
-                        localStorage.setItem('currentUser', JSON.stringify(user));
-                        window.location.href = 'result.html';
-                    })
-                    .catch((error) => {
-                        console.log('Error al guardar en Firebase:', error);
+            let username = document.getElementById('username').value;
+            let photo = document.getElementById('photo').files[0];
+
+            if (username && photo) {
+                console.log('Nombre de usuario y foto presentes.');
+
+                const storageReference = storageRef(storage, 'photos/' + Date.now() + '_' + photo.name);
+
+                uploadBytes(storageReference, photo).then((snapshot) => {
+                    console.log('Foto subida a Firebase Storage');
+
+                    getDownloadURL(snapshot.ref).then((downloadURL) => {
+                        let user = {
+                            name: username,
+                            photo: downloadURL,
+                            timestamp: new Date().getTime()
+                        };
+
+                        push(ref(database, 'users'), user)
+                            .then(() => {
+                                console.log('Usuario guardado en Firebase');
+
+                                localStorage.setItem('currentUser', JSON.stringify(user));
+
+                                window.location.href = 'result.html';
+                            })
+                            .catch((error) => {
+                                console.log('Error al guardar en Firebase:', error);
+                            });
                     });
-            });
-        }).catch((error) => {
-            console.log('Error al subir la foto a Firebase Storage:', error);
+                }).catch((error) => {
+                    console.log('Error al subir la foto a Firebase Storage:', error);
+                });
+            } else {
+                alert("Por favor, completa todos los campos antes de registrarte.");
+            }
         });
     } else {
-        alert("Por favor, completa todos los campos antes de registrarte.");
+        console.log("Formulario de registro no encontrado en el DOM.");
     }
-});
 
-function getRandomUser(currentUser) {
-    return new Promise((resolve, reject) => {
-        onValue(ref(database, 'users'), (snapshot) => {
-            let users = [];
-            snapshot.forEach((childSnapshot) => {
-                let user = childSnapshot.val();
-                if ((new Date().getTime() - user.timestamp) < 86400000) {
-                    users.push(user);
-                }
-            });
-
-            if (users.length <= 1) {
-                resolve(null);
-            } else {
-                let randomIndex;
-                do {
-                    randomIndex = Math.floor(Math.random() * users.length);
-                } while (users[randomIndex].name === currentUser.name);
-
-                resolve(users[randomIndex]);
-            }
-        }, { onlyOnce: true });
-    });
-}
-
-document.addEventListener('DOMContentLoaded', function() {
+    // Funciones del carrusel
     let slideIndex = [1, 1, 1];
-    let slideId = ["carousel1", "carousel2", "carousel3"];
+    const slideId = ["carousel1", "carousel2", "carousel3"];
 
-    function plusSlides(n, no) {
+    window.plusSlides = function(n, no) {
         showSlides(slideIndex[no] += n, no);
-    }
+    };
 
     function showSlides(n, no) {
         let i;
         let x = document.getElementById(slideId[no]).getElementsByClassName("carousel-image");
-        if (n > x.length) {slideIndex[no] = 1}
-        if (n < 1) {slideIndex[no] = x.length}
+        if (n > x.length) { slideIndex[no] = 1; }
+        if (n < 1) { slideIndex[no] = x.length; }
         for (i = 0; i < x.length; i++) {
-            x[i].style.display = "none";  
+            x[i].style.display = "none";
         }
-        x[slideIndex[no]-1].style.display = "block";  
+        x[slideIndex[no] - 1].style.display = "block";
     }
 
+    // Inicializar los carruseles
     showSlides(1, 0);
     showSlides(1, 1);
     showSlides(1, 2);
@@ -134,7 +127,31 @@ document.addEventListener('DOMContentLoaded', function() {
 
         let countdownInterval = setInterval(updateCountdown, 1000);
     }
-
-    window.plusSlides = plusSlides;
-    window.showSlides = showSlides;
 });
+
+// Función para obtener un usuario aleatorio de Firebase Database
+function getRandomUser(currentUser) {
+    return new Promise((resolve, reject) => {
+        onValue(ref(database, 'users'), (snapshot) => {
+            let users = [];
+
+            snapshot.forEach((childSnapshot) => {
+                let user = childSnapshot.val();
+                if ((new Date().getTime() - user.timestamp) < 86400000) {
+                    users.push(user);
+                }
+            });
+
+            if (users.length <= 1) {
+                resolve(null);
+            } else {
+                let randomIndex;
+                do {
+                    randomIndex = Math.floor(Math.random() * users.length);
+                } while (users[randomIndex].name === currentUser.name);
+
+                resolve(users[randomIndex]);
+            }
+        }, { onlyOnce: true });
+    });
+}
