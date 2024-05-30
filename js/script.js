@@ -16,16 +16,8 @@ const app = initializeApp(firebaseConfig);
 const database = getDatabase(app);
 const storage = getStorage(app);
 
-document.addEventListener('DOMContentLoaded', function() {
-    const registerForm = document.getElementById('registerForm');
-
-    // Mensaje de depuración para verificar si el formulario existe en el DOM
-    if (registerForm) {
-        console.log("Formulario de registro encontrado.");
-
-        registerForm.addEventListener('submit', function(event) {
-            event.preventDefault();
- 
+document.getElementById('registerForm').addEventListener('submit', function(event) {
+    event.preventDefault();
     let username = document.getElementById('username').value;
     let photo = document.getElementById('photo').files[0];
     
