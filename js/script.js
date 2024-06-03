@@ -1,3 +1,23 @@
+// Importar las funciones necesarias de los SDKs de Firebase
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+import { getDatabase, ref, push, onValue } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js";
+import { getStorage, ref as storageRef, uploadBytes, getDownloadURL } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-storage.js";
+
+// Configurar Firebase con los parámetros del proyecto
+const firebaseConfig = {
+    apiKey: "AIzaSyA_v3KtWPdISsc1ClCg6AD4Ja349N0AHk4",
+    authDomain: "zipi-73ec9.firebaseapp.com",
+    databaseURL: "https://zipi-73ec9-default-rtdb.europe-west1.firebasedatabase.app",
+    projectId: "zipi-73ec9",
+    storageBucket: "zipi-73ec9.appspot.com",
+    messagingSenderId: "265288167467",
+    appId: "1:265288167467:web:4a4e7ef9ac376449807a6e"
+};
+
+const app = initializeApp(firebaseConfig);
+const database = getDatabase(app);
+const storage = getStorage(app);
+
 document.addEventListener('DOMContentLoaded', function() {
     console.log("DOM completamente cargado y analizado");
     const registerForm = document.getElementById('registerForm');
