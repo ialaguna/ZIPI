@@ -2,7 +2,7 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, orientation=landscape">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Zipi - El Mejor Zurracapote</title>
     <link rel="stylesheet" href="css/styles.css">
     <style>
@@ -13,34 +13,67 @@
         header {
             background: url('images/header.jpg') no-repeat center center/cover;
         }
+        nav ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            display: flex; /* Hace que los elementos de la lista estén en línea */
+            justify-content: center; /* Centra los elementos horizontalmente */
+            flex-wrap: wrap; /* Permite que los elementos se envuelvan si no caben en una sola línea */
+        }
+        nav ul li {
+            margin-right: 20px; /* Espacio entre elementos */
+        }
+        nav ul li:last-child {
+            margin-right: 0; /* Elimina el margen derecho del último elemento */
+        }
+        nav ul li a {
+            display: block;
+            color: white;
+            text-align: center;
+            padding: 14px 16px;
+            text-decoration: none;
+        }
+        nav ul li a:hover {
+            background-color: #111;
+        }
+        /* Estilos para pantallas pequeñas */
+        @media screen and (max-width: 770px) {
+            nav ul {
+                display: block; /* Cambia a diseño de bloque para pantallas pequeñas */
+                text-align: center; /* Centra los elementos en pantallas pequeñas */
+            }
+            nav ul li {
+                flex: 1 0 100%; /* Hace que los elementos ocupen todo el ancho disponible */
+                margin-right: 0; /* Elimina el margen derecho en pantallas pequeñas */
+                text-align: center; /* Centra el texto dentro de los elementos de la lista */
+            }
+        }
     </style>
- <script type="module">
-  // Import the functions you need from the SDKs you need
-  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
-  // TODO: Add SDKs for Firebase products that you want to use
-  // https://firebase.google.com/docs/web/setup#available-libraries
-import { getDatabase, ref, push, onValue } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js";
-  // Your web app's Firebase configuration
-  const firebaseConfig = {
-    apiKey: "AIzaSyA_v3KtWPdISsc1ClCg6AD4Ja349N0AHk4",
-    authDomain: "zipi-73ec9.firebaseapp.com",
-    databaseURL: "https://zipi-73ec9-default-rtdb.europe-west1.firebasedatabase.app",
-    projectId: "zipi-73ec9",
-    storageBucket: "zipi-73ec9.appspot.com",
-    messagingSenderId: "265288167467",
-    appId: "1:265288167467:web:4a4e7ef9ac376449807a6e"
-  };
-
-  // Initialize Firebase
-  const app = initializeApp(firebaseConfig);
-  const database = getDatabase(app);
-
-    // Make database available globally
-    window.database = database;
-    window.firebaseRef = ref;
-    window.firebasePush = push;
-    window.firebaseOnValue = onValue;
-</script>
+    <script type="module">
+        // Importa las funciones necesarias de Firebase
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+        import { getDatabase, ref, push, onValue } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js";
+        // Configuración de Firebase
+        const firebaseConfig = {
+            apiKey: "AIzaSyA_v3KtWPdISsc1ClCg6AD4Ja349N0AHk4",
+            authDomain: "zipi-73ec9.firebaseapp.com",
+            databaseURL: "https://zipi-73ec9-default-rtdb.europe-west1.firebasedatabase.app",
+            projectId: "zipi-73ec9",
+            storageBucket: "zipi-73ec9.appspot.com",
+            messagingSenderId: "265288167467",
+            appId: "1:265288167467:web:4a4e7ef9ac376449807a6e"
+        };
+        // Inicializa Firebase
+        const app = initializeApp(firebaseConfig);
+        const database = getDatabase(app);
+        // Hace la base de datos disponible globalmente
+        window.database = database;
+        window.firebaseRef = ref;
+        window.firebasePush = push;
+        window.firebaseOnValue = onValue;
+    </script>
 </head>
 <body>
     <header>
@@ -108,13 +141,13 @@ import { getDatabase, ref, push, onValue } from "https://www.gstatic.com/firebas
         <div class="container">
             <h2>Juego</h2>
             <p class="white-text">Si te gusta tanto conocer gente como nuestro zurra, anímate y juega a nuestro juego para conocer gente y ganar bebida gratis! Solo tendrás que registrarte con tu nombre y una foto tuya y te proporcionaremos la foto y un nombre de otra persona aleatoria que deberás encontrar antes de que pasen 24h para poder conseguir un Zipi GRATUITO. ¿Te animas?</p>
-            <form id="registerForm">
+            <form id="registerForm" action="result.html" method="post" enctype="multipart/form-data">
                 <label for="username">Nombre:</label>
                 <input type="text" id="username" name="username" required>
-
+    
                 <label for="photo">Foto:</label>
                 <input type="file" id="photo" name="photo" accept="image/*" required>
-
+    
                 <button type="submit">Registrarse</button>
             </form>
         </div>
