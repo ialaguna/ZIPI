@@ -142,10 +142,12 @@ document.addEventListener('DOMContentLoaded', function() {
                 let opinion = childSnapshot.val();
                 let opinionElement = document.createElement('div');
                 opinionElement.classList.add('opinion');
+                let date = new Date(opinion.timestamp).toLocaleDateString();
                 opinionElement.innerHTML = `
                     <h4>${opinion.username}</h4>
                     <div class="rating">${'★'.repeat(opinion.rating)}</div>
                     <p>${opinion.review}</p>
+                    <div class="date">${date}</div>
                 `;
                 opinionsList.appendChild(opinionElement);
             });
