@@ -5,63 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Opiniones - Zipi</title>
     <link rel="stylesheet" href="css/styles.css">
-        <style>
-        body {
-            background: url('images/background.jpg') no-repeat center center fixed;
-            background-size: cover;
-        }
-        header {
-            background: url('images/header.jpg') no-repeat center center/cover;
-        }
-        nav ul {
-            list-style-type: none;
-            margin: 0;
-            padding: 0;
-            overflow: hidden;
-            display: flex; /* Hace que los elementos de la lista estén en línea */
-            justify-content: center; /* Centra los elementos horizontalmente */
-        }
-        nav ul li {
-            margin-right: 20px; /* Espacio entre elementos */
-        }
-        nav ul li:last-child {
-            margin-right: 0; /* Elimina el margen derecho del último elemento */
-        }
-        nav ul li a {
-            display: block;
-            color: white;
-            text-align: center;
-            padding: 14px 16px;
-            text-decoration: none;
-        }
-        nav ul li a:hover {
-            background-color: #111;
-        }
-        /* Estilos para pantallas pequeñas */
-        @media screen and (max-width: 770px) {
-            nav ul {
-                display: block; /* Cambia a diseño de bloque para pantallas pequeñas */
-                text-align: center; /* Centra los elementos en pantallas pequeñas */
-            }
-            nav ul li {
-                margin-right: 0; /* Elimina el margen derecho en pantallas pequeñas */
-            }
-        }
-
-        /* Estilos para la imagen del usuario aleatorio */
-        #randomPhoto {
-            width: 100%;
-            max-width: 400px; /* Ancho máximo para la imagen */
-            height: auto; /* Mantener la proporción de la imagen */
-            border-radius: 0%; /* Hacer la imagen circular */
-            object-fit: cover; /* Ajustar la imagen dentro del contenedor */
-        }
-    </style>
-    </head>
+</head>
 <body>
     <header>
         <div class="container">
-            <h1> </h1>
+            <h1>Opiniones</h1>
             <nav>
                 <ul>
                     <li><a href="index.html#home">Inicio</a></li>
@@ -76,9 +24,10 @@
 
     <section id="opinions">
         <div class="container">
-        <h2>Opiniones</h2>
-          
-            <form id="opinionForm">
+            <div id="opinionsList">
+                <!-- Aquí se cargarán las opiniones -->
+            </div>
+            <form id="opinionForm" class="form-style">
                 <label for="opinionUsername">Nombre:</label>
                 <input type="text" id="opinionUsername" name="username" required>
 
@@ -102,10 +51,8 @@
                 <button type="submit">Enviar Opinión</button>
             </form>
         </div>
-          <div id="opinionsList">
-                <!-- Aquí se cargarán las opiniones -->
-            </div>
     </section>
+
     <footer>
         <div class="container">
             <p>&copy; 2024 Zipi. Todos los derechos reservados.</p>
