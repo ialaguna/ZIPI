@@ -2,7 +2,7 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scaleable=no, orientation=landscape">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, orientation=landscape">
     <title>Zipi - El Mejor Zurracapote</title>
     <link rel="stylesheet" href="css/styles.css">
     <style>
@@ -55,7 +55,7 @@
                     <li><a href="#home">Inicio</a></li>
                     <li><a href="#products">Productos</a></li>
                     <li><a href="#game">Juego</a></li>
-                    <li><a href="#opinions">Opiniones</a></li>
+                    <li><a href="opinions.html">Opiniones</a></li>
                     <li><a href="#about">Sobre Nosotros</a></li>
                     <li><a href="#contact">Contacto</a></li>
                 </ul>
@@ -121,38 +121,6 @@
                 <input type="file" id="photo" name="photo" accept="image/*" required>
 
                 <button type="submit">Registrarse</button>
-            </form>
-        </div>
-    </section>
-
-    <section id="opinions">
-        <div class="container">
-            <h2>Opiniones</h2>
-            <div id="opinionsList">
-                <!-- Aquí se cargarán las opiniones -->
-            </div>
-            <form id="opinionForm">
-                <label for="opinionUsername">Nombre:</label>
-                <input type="text" id="opinionUsername" name="username" required>
-
-                <label for="rating">Calificación:</label>
-                <div class="star-rating">
-                    <input type="radio" id="5-stars" name="rating" value="5" />
-                    <label for="5-stars" class="star">&#9733;</label>
-                    <input type="radio" id="4-stars" name="rating" value="4" />
-                    <label for="4-stars" class="star">&#9733;</label>
-                    <input type="radio" id="3-stars" name="rating" value="3" />
-                    <label for="3-stars" class="star">&#9733;</label>
-                    <input type="radio" id="2-stars" name="rating" value="2" />
-                    <label for="2-stars" class="star">&#9733;</label>
-                    <input type="radio" id="1-star" name="rating" value="1" />
-                    <label for="1-star" class="star">&#9733;</label>
-                </div>
-
-                <label for="review">Reseña:</label>
-                <textarea id="review" name="review" required></textarea>
-
-                <button type="submit">Enviar Opinión</button>
             </form>
         </div>
     </section>
