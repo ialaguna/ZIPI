@@ -436,7 +436,7 @@ section#opinions form label {
     display: block;
     margin-top: 10px;
     font-weight: bold;
-    text-align: left; /* Alinear texto a la izquierda */
+    text-align: center; /* Alinear texto a la izquierda */
 }
 
 section#opinions form input[type="text"],
