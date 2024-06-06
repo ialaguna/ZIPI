@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Opiniones - Zipi</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>Opiniones</h1>
+            <nav>
+                <ul>
+                    <li><a href="index.html#home">Inicio</a></li>
+                    <li><a href="index.html#products">Productos</a></li>
+                    <li><a href="index.html#game">Juego</a></li>
+                    <li><a href="index.html#about">Sobre Nosotros</a></li>
+                    <li><a href="index.html#contact">Contacto</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <section id="opinions">
+        <div class="container">
+            <div id="opinionsList">
+                <!-- Aquí se cargarán las opiniones -->
+            </div>
+            <form id="opinionForm">
+                <label for="opinionUsername">Nombre:</label>
+                <input type="text" id="opinionUsername" name="username" required>
+
+                <label for="rating">Calificación:</label>
+                <div class="star-rating">
+                    <input type="radio" id="5-stars" name="rating" value="5" />
+                    <label for="5-stars" class="star">&#9733;</label>
+                    <input type="radio" id="4-stars" name="rating" value="4" />
+                    <label for="4-stars" class="star">&#9733;</label>
+                    <input type="radio" id="3-stars" name="rating" value="3" />
+                    <label for="3-stars" class="star">&#9733;</label>
+                    <input type="radio" id="2-stars" name="rating" value="2" />
+                    <label for="2-stars" class="star">&#9733;</label>
+                    <input type="radio" id="1-star" name="rating" value="1" />
+                    <label for="1-star" class="star">&#9733;</label>
+                </div>
+
+                <label for="review">Reseña:</label>
+                <textarea id="review" name="review" required></textarea>
+
+                <button type="submit">Enviar Opinión</button>
+            </form>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2024 Zipi. Todos los derechos reservados.</p>
+        </div>
+    </footer>
+
+    <script src="js/opinions.js" type="module"></script>
+</body>
+</html>
