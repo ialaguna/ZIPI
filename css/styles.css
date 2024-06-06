@@ -414,6 +414,8 @@ section#opinions {
     padding: 60px 0;
     border-radius: 10px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    max-width: 800px;
+    margin: 0 auto; /* Centrar el contenedor */
 }
 
 section#opinions h2 {
@@ -436,7 +438,7 @@ section#opinions form label {
     display: block;
     margin-top: 10px;
     font-weight: bold;
-    text-align: center; /* Alinear texto a la izquierda */
+    text-align: left; /* Alinear texto a la izquierda */
 }
 
 section#opinions form input[type="text"],
