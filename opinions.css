@@ -1,4 +1,4 @@
-/* Estilos para la sección de opiniones */
+/* General styles */
 body {
     font-family: Arial, sans-serif;
     margin: 0;
@@ -6,6 +6,7 @@ body {
     box-sizing: border-box;
 }
 
+/* Header styles */
 header {
     background-color: #e63946;
     color: white;
@@ -51,6 +52,92 @@ h2 {
     font-size: 2em; /* Tamaño de fuente de los encabezados */
 }
 
+/* Form Style (applied to both forms) */
+.form-style {
+    max-width: 600px;
+    margin: 0 auto;
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    font-size: 1em; /* Tamaño de fuente más pequeño */
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-style label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: bold;
+    color: #333;
+}
+
+.form-style input[type="text"],
+.form-style textarea {
+    width: 100%;
+    padding: 12px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    font-size: 1em; /* Ajustar el tamaño de la fuente */
+    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
+    transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+.form-style input[type="text"]:focus,
+.form-style textarea:focus {
+    border-color: #e63946;
+    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1), 0 0 8px rgba(230, 57, 70, 0.3);
+}
+
+.form-style .star-rating {
+    display: flex;
+    justify-content: center; /* Centrar las estrellas */
+    gap: 10px; /* Espacio entre las estrellas */
+}
+
+.form-style .star-rating input {
+    display: none;
+}
+
+.form-style .star-rating label {
+    font-size: 2em;
+    color: #ccc;
+    cursor: pointer;
+    transition: color 0.2s;
+}
+
+.form-style .star-rating input:checked ~ label,
+.form-style .star-rating label:hover,
+.form-style .star-rating label:hover ~ label {
+    color: #e63946;
+}
+
+.form-style textarea {
+    height: 100px;
+    resize: vertical;
+}
+
+.form-style button {
+    display: block;
+    width: 100%;
+    padding: 15px;
+    margin-top: 10px;
+    background-color: #e63946;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1em;
+    transition: background-color 0.3s ease;
+}
+
+.form-style button:hover {
+    background-color: #d62828;
+}
+
+/* Opiniones Section */
 section#opinions {
     background-color: rgba(255, 255, 255, 0.8);
     text-align: center;
@@ -105,89 +192,4 @@ section#opinions h2 {
 .opinion .date {
     font-size: 0.9em;
     color: #999;
-}
-
-/* Form Style for Opinions */
-section#opinions form.form-style {
-    max-width: 600px;
-    margin: 20px auto;
-    background: white;
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    font-size: 1em; /* Tamaño de fuente más pequeño */
-}
-
-section#opinions form.form-style .form-group {
-    margin-bottom: 20px;
-}
-
-section#opinions form.form-style label {
-    display: block;
-    margin-bottom: 8px;
-    font-weight: bold;
-    color: #333;
-}
-
-section#opinions form.form-style input[type="text"],
-section#opinions form.form-style textarea {
-    width: 100%;
-    padding: 12px;
-    border-radius: 5px;
-    border: 1px solid #ccc;
-    font-size: 1em; /* Ajustar el tamaño de la fuente */
-    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
-    transition: border-color 0.3s, box-shadow 0.3s;
-}
-
-section#opinions form.form-style input[type="text"]:focus,
-section#opinions form.form-style textarea:focus {
-    border-color: #e63946;
-    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1), 0 0 8px rgba(230, 57, 70, 0.3);
-}
-
-section#opinions form.form-style .star-rating {
-    display: flex;
-    justify-content: center; /* Centrar las estrellas */
-    gap: 10px; /* Espacio entre las estrellas */
-}
-
-section#opinions form.form-style .star-rating input {
-    display: none;
-}
-
-section#opinions form.form-style .star-rating label {
-    font-size: 2em;
-    color: #ccc;
-    cursor: pointer;
-    transition: color 0.2s;
-}
-
-section#opinions form.form-style .star-rating input:checked ~ label,
-section#opinions form.form-style .star-rating label:hover,
-section#opinions form.form-style .star-rating label:hover ~ label {
-    color: #e63946;
-}
-
-section#opinions form.form-style textarea {
-    height: 100px;
-    resize: vertical;
-}
-
-section#opinions form.form-style button {
-    display: block;
-    width: 100%;
-    padding: 15px;
-    margin-top: 10px;
-    background-color: #e63946;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 1em;
-    transition: background-color 0.3s ease;
-}
-
-section#opinions form.form-style button:hover {
-    background-color: #d62828;
 }
