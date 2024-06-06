@@ -407,74 +407,6 @@ footer {
     section#about .value p {
         font-size: 1em;
     }
-/* Form Style (applied to both forms) */
-.form-style {
-    max-width: 600px;
-    margin: 0 auto;
-    background: white;
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-}
-
-.form-style label {
-    display: block;
-    margin-top: 10px;
-    font-weight: bold;
-    text-align: left; /* Alinear texto a la izquierda */
-}
-
-.form-style input[type="text"],
-.form-style select,
-.form-style textarea {
-    width: 100%;
-    padding: 10px;
-    margin-top: 5px;
-    border-radius: 5px;
-    border: 1px solid #ccc;
-}
-
-.form-style .star-rating {
-    display: flex;
-    justify-content: center; /* Centrar las estrellas */
-    margin: 10px 0;
-}
-
-.form-style .star-rating input {
-    display: none;
-}
-
-.form-style .star-rating label {
-    font-size: 2em;
-    color: #ccc;
-    cursor: pointer;
-    transition: color 0.2s;
-}
-
-.form-style .star-rating input:checked ~ label,
-.form-style .star-rating label:hover,
-.form-style .star-rating label:hover ~ label {
-    color: #e63946;
-}
-
-.form-style button {
-    display: block;
-    width: 100%;
-    padding: 15px;
-    margin-top: 10px;
-    background-color: #e63946;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 1.1em;
-    transition: background-color 0.3s ease;
-}
-
-.form-style button:hover {
-    background-color: #d62828;
-}
-
 /* Opiniones Section */
 section#opinions {
     background-color: rgba(255, 255, 255, 0.8);
@@ -491,6 +423,73 @@ section#opinions h2 {
     font-size: 2.5em;
     text-align: center;
     margin-bottom: 20px;
+}
+
+section#opinions form {
+    max-width: 600px;
+    margin: 0 auto;
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+section#opinions form label {
+    display: block;
+    margin-top: 10px;
+    font-weight: bold;
+    text-align: left; /* Alinear texto a la izquierda */
+}
+
+section#opinions form input[type="text"],
+section#opinions form select,
+section#opinions form textarea {
+    width: 100%;
+    padding: 10px;
+    margin-top: 5px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+}
+
+section#opinions form .star-rating {
+    display: flex;
+    justify-content: center; /* Centrar las estrellas */
+    margin: 10px 0;
+}
+
+section#opinions form .star-rating input {
+    display: none;
+}
+
+section#opinions form .star-rating label {
+    font-size: 2em;
+    color: #ccc;
+    cursor: pointer;
+    transition: color 0.2s;
+}
+
+section#opinions form .star-rating input:checked ~ label,
+section#opinions form .star-rating label:hover,
+section#opinions form .star-rating label:hover ~ label {
+    color: #e63946;
+}
+
+section#opinions form button {
+    display: block;
+    width: 100%;
+    padding: 15px;
+    margin-top: 10px;
+    background-color: #e63946;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1.1em;
+    transition: background-color 0.3s ease;
+}
+
+section#opinions form button:hover {
+    background-color: #d62828;
 }
 
 #opinionsList {
