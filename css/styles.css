@@ -1,228 +1,414 @@
-/* General styles */
+/* General Styles */
 body {
-    font-family: Arial, sans-serif;
+    font-family: 'Raleway', sans-serif;
     margin: 0;
     padding: 0;
-    box-sizing: border-box;
+    background-color: #f5f5f5; /* Light background */
+    color: #333; /* Darker text color for readability */
+    line-height: 1.6;
 }
 
+/* Container */
+.container {
+    width: 90%; /* Ajusta este valor según tu necesidad */
+    margin: 0 auto;
+    max-width: 1200px; /* Ajusta el ancho máximo si es necesario */
+    padding: 0 15px; /* Add padding to ensure proper spacing on mobile */
+}
+
+/* Header Styles */
 header {
-    background-color: #e63946;
     color: white;
-    padding: 10px 0;
+    padding: 20px 0;
+}
+
+header h1 {
+    margin: 0;
+    font-size: 4.5em;
     text-align: center;
 }
 
-header nav ul {
+nav ul {
     list-style: none;
     padding: 0;
+    text-align: center;
 }
 
-header nav ul li {
+nav ul li {
     display: inline;
-    margin: 0 10px;
+    margin: 0 15px;
 }
 
-header nav ul li a {
+nav ul li a {
     color: white;
     text-decoration: none;
-    font-weight: bold;
+    font-size: 1.1em;
 }
 
-header nav ul li a:hover {
+nav ul li a:hover {
     text-decoration: underline;
 }
 
-.container {
-    width: 80%;
-    margin: auto;
-    overflow: hidden;
+/* Section Styles */
+section {
+    padding: 60px 0;
 }
 
-h1, h2, h3, h4, h5, h6 {
-    margin: 0;
-    padding: 0;
-}
-
-h2 {
-    margin: 20px 0;
+section h2 {
+    text-align: center;
+    font-size: 2em;
+    margin-bottom: 20px;
     color: #333;
+}
+
+section#products h2,
+section#contact h2 {
+    color: #333333; /* Change title color to white */
+}
+
+section p {
+    text-align: left;
+    font-size: 1.2em;
+    color: #666;
+}
+
+/* Home Section */
+section#home {
+    background: none;
+    color: white;
+    text-align: center;
+    padding: 100px 0;
+}
+
+section#home h2, section#home p {
+    color: #333333;
+}
+
+section#home img {
+    width: 100%;
+    max-width: 100%;
+    height: auto;
+}
+
+/* Center text in home section */
+.center-text {
     text-align: center;
 }
 
-/* Form Style (applied to both forms) */
-.form-style {
-    max-width: 600px;
+/* Products Section */
+section#products .product-slider {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+section#products .product {
+    background: white;
+    margin: 15px;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    width: 100%;
+    max-width: 300px; /* Limit the maximum width */
+    box-sizing: border-box;
+}
+
+section#products .product img {
+    max-width: 100%;
+    border-radius: 10px;
+}
+
+section#products .product p {
+    font-size: 1.1em;
+    color: #333;
+}
+
+/* Carousel */
+.carousel {
+    position: relative;
+    overflow: hidden;
+}
+
+.carousel img {
+    width: 100%;
+    display: none;
+}
+
+.carousel img:first-child {
+    display: block;
+}
+
+.carousel button {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: rgba(0, 0, 0, 0.5);
+    color: white;
+    border: none;
+    padding: 10px;
+    cursor: pointer;
+    font-size: 18px;
+    z-index: 2;
+}
+
+.carousel button.prev {
+    left: 10px;
+}
+
+.carousel button.next {
+    right: 10px;
+}
+
+/* Game Section */
+section#game {
+    background-color: rgba(255, 255, 255, 0.8);
+    text-align: left; /* Center text in game section */
+    padding: 60px 0;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+
+section#game h2 {
+    color: #e63946;
+    font-size: 2.5em;
+    font-family: 'Montserrat', sans-serif; /* Change font */
+    text-shadow: 2px 2px #f1faee; /* Add text shadow */
+}
+
+section#game form {
+    max-width: 100%;
+    width: 100%;
     margin: 0 auto;
     background: white;
     padding: 20px;
     border-radius: 10px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    animation: bounceIn 1s ease; /* Add bounce-in animation */
+    box-sizing: border-box;
 }
 
-.form-group {
-    margin-bottom: 20px;
-}
-
-.form-style label {
+section#game label {
     display: block;
-    margin-bottom: 8px;
+    margin-top: 10px;
     font-weight: bold;
     color: #333;
+    font-size: 1.1em; /* Increase label font size */
 }
 
-.form-style input[type="text"],
-.form-style textarea {
+section#game input[type="text"],
+section#game input[type="email"],
+section#game input[type="file"],
+section#game textarea {
     width: 100%;
     padding: 10px;
+    margin-top: 5px;
     border-radius: 5px;
     border: 1px solid #ccc;
-    font-size: 1em;
-    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
-    transition: border-color 0.3s, box-shadow 0.3s;
+    box-sizing: border-box;
 }
 
-.form-style input[type="text"]:focus,
-.form-style textarea:focus {
-    border-color: #e63946;
-    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1), 0 0 8px rgba(230, 57, 70, 0.3);
-}
-
-.form-style .star-rating {
-    display: flex;
-    justify-content: center; /* Centrar las estrellas */
-    gap: 10px; /* Espacio entre las estrellas */
-}
-
-.form-style .star-rating input {
-    display: none;
-}
-
-.form-style .star-rating label {
-    font-size: 2em;
-    color: #ccc;
-    cursor: pointer;
-    transition: color 0.2s;
-}
-
-.form-style .star-rating input:checked ~ label,
-.form-style .star-rating label:hover,
-.form-style .star-rating label:hover ~ label {
-    color: #e63946;
-}
-
-.form-style textarea {
-    height: 100px;
-    resize: vertical;
-}
-
-.form-style button {
+section#game button {
     display: block;
     width: 100%;
     padding: 15px;
     margin-top: 10px;
-    background-color: #e63946;
+    background-color: #e63946; /* Brighter button color */
     color: white;
     border: none;
     border-radius: 5px;
     cursor: pointer;
-    font-size: 1em;
-    transition: background-color 0.3s ease;
+    font-size: 1.1em;
+    transition: background-color 0.3s ease; /* Smooth transition for hover */
 }
 
-.form-style button:hover {
-    background-color: #d62828;
+section#game button:hover {
+    background-color: #d62828; /* Darker hover color */
 }
 
-/* Ensure the footer is styled similarly to the header */
-footer {
-    background-color: #e63946;
-    color: white;
-    text-align: center;
-    padding: 10px 0;
-    position: relative;
-    bottom: 0;
-    width: 100%;
-}
-
-footer p {
-    margin: 0;
-}
-
-/* Additional styles for other sections, if needed */
-section#home,
-section#products,
-section#game,
-section#about,
-section#contact {
+/* About Section */
+section#about {
+    background: url('../images/about-bg.jpg') no-repeat center center/cover; /* Cambia esto al fondo que desees */
     padding: 60px 0;
+    color: white;
 }
 
-section#home .container,
-section#products .container,
-section#game .container,
-section#about .container,
-section#contact .container {
-    background: rgba(255, 255, 255, 0.8);
+section#about .about-container {
+    background: rgba(255, 255, 255, 0.8); /* Fondo blanco con opacidad */
     padding: 20px;
     border-radius: 10px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    color: #333; /* Color de texto dentro del contenedor */
+    width: 80%; /* Ajusta este valor según tu necesidad */
+    margin: 0 auto; /* Centra el contenedor */
+    max-width: 1000px; /* Ajusta el ancho máximo si es necesario */
 }
 
-.product-slider {
-    display: flex;
-    justify-content: space-between;
-    flex-wrap: wrap;
+section#about .value {
+    margin-bottom: 30px;
 }
 
-.product {
+section#about .value h3 {
+    font-size: 1.8em;
+    color: #444;
+}
+
+section#about .value p {
+    font-size: 1.2em;
+    color: #666;
+}
+
+/* Contact Section */
+section#contact form {
+    max-width: 100%;
+    width: 100%;
+    margin: 0 auto;
     background: white;
+    padding: 20px;
     border-radius: 10px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    margin: 10px;
-    padding: 10px;
-    flex: 1 1 calc(33% - 20px);
     box-sizing: border-box;
 }
 
-.product img {
-    max-width: 100%;
-    border-radius: 10px;
-}
-
-.carousel {
-    position: relative;
-    width: 100%;
-}
-
-.carousel img {
-    width: 100%;
-    border-radius: 10px;
-}
-
-.carousel .prev,
-.carousel .next {
-    cursor: pointer;
-    position: absolute;
-    top: 50%;
-    width: auto;
-    margin-top: -22px;
-    padding: 16px;
-    color: white;
+section#contact form label {
+    display: block;
+    margin-top: 10px;
     font-weight: bold;
-    font-size: 18px;
-    transition: 0.6s ease;
-    border-radius: 0 3px 3px 0;
-    user-select: none;
-    background-color: rgba(0, 0, 0, 0.5);
 }
 
-.carousel .next {
-    right: 0;
-    border-radius: 3px 0 0 3px;
+section#contact form input[type="text"],
+section#contact form input[type="email"],
+section#contact form textarea {
+    width: 100%;
+    padding: 10px;
+    margin-top: 5px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
 }
 
-.carousel .prev:hover,
-.carousel .next:hover {
-    background-color: rgba(0, 0, 0, 0.8);
+section#contact form button {
+    display: block;
+    width: 100%;
+    padding: 15px;
+    margin-top: 10px;
+    background-color: #333;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1.1em;
+    transition: background-color 0.3s ease; /* Smooth transition for hover */
+}
+
+section#contact form button:hover {
+    background-color: #555;
+}
+
+/* Footer Styles */
+footer {
+    background-color: #333;
+    color: white;
+    text-align: left;
+    padding: 20px 0;
+}
+
+/* CSS específico para la página de resultados */
+#resultMessage {
+    text-align: center;
+}
+
+#resultMessage img {
+    display: block;
+    margin: 0 auto;
+}
+
+#resultMessage p {
+    text-align: center;
+    font-size: 1.2em;
+    color: #333;
+}
+
+/* Animations */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes bounceIn {
+    from {
+        transform: scale(0.5);
+        opacity: 0;
+    }
+    to {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+    nav ul {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        padding: 0;
+    }
+
+    nav ul li {
+        display: inline-block;
+        margin: 0 5px;
+    }
+
+    nav ul li a {
+        font-size: 0.9em;
+        padding: 5px 10px;
+    }
+
+    .product-slider {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    section {
+        padding: 30px 0;
+    }
+
+    section#home {
+        padding: 50px 0;
+    }
+
+    section#home h2 {
+        font-size: 1.5em;
+    }
+
+    section#home p {
+        font-size: 1em;
+    }
+
+    section#home img {
+        width: 100%;
+        max-width: 100%;
+        height: auto;
+    }
+
+    section#game h2 {
+        font-size: 2em;
+    }
+
+    section#about .value h3 {
+        font-size: 1.5em;
+    }
+
+    section#about .value p {
+        font-size: 1em;
+    }
+
+    section#contact form {
+        padding: 15px;
+    }
 }
