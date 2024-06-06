@@ -6,6 +6,7 @@ body {
     box-sizing: border-box;
 }
 
+/* Header styles */
 header {
     background-color: #e63946;
     color: white;
@@ -33,12 +34,14 @@ header nav ul li a:hover {
     text-decoration: underline;
 }
 
+/* Container */
 .container {
     width: 80%;
     margin: auto;
     overflow: hidden;
 }
 
+/* Headings */
 h1, h2, h3, h4, h5, h6 {
     margin: 0;
     padding: 0;
@@ -58,6 +61,7 @@ h2 {
     padding: 20px;
     border-radius: 10px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    font-size: 1em; /* Tamaño de fuente más pequeño */
 }
 
 .form-group {
@@ -74,10 +78,10 @@ h2 {
 .form-style input[type="text"],
 .form-style textarea {
     width: 100%;
-    padding: 12px;
+    padding: 10px;
     border-radius: 5px;
     border: 1px solid #ccc;
-    font-size: 16px;
+    font-size: 1em; /* Ajustar el tamaño de la fuente */
     box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
     transition: border-color 0.3s, box-shadow 0.3s;
 }
@@ -99,7 +103,7 @@ h2 {
 }
 
 .form-style .star-rating label {
-    font-size: 2.5em;
+    font-size: 2em;
     color: #ccc;
     cursor: pointer;
     transition: color 0.2s;
@@ -126,7 +130,7 @@ h2 {
     border: none;
     border-radius: 5px;
     cursor: pointer;
-    font-size: 1.1em;
+    font-size: 1em;
     transition: background-color 0.3s ease;
 }
 
@@ -143,11 +147,12 @@ section#opinions {
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
     max-width: 800px;
     margin: 0 auto; /* Centrar el contenedor */
+    font-size: 1em; /* Ajustar el tamaño de la fuente */
 }
 
 section#opinions h2 {
     color: #e63946;
-    font-size: 2.5em;
+    font-size: 2em; /* Ajustar el tamaño del encabezado */
     text-align: center;
     margin-bottom: 20px;
 }
@@ -173,12 +178,12 @@ section#opinions h2 {
 
 .opinion h4 {
     margin: 0 0 5px 0;
-    font-size: 1.2em;
+    font-size: 1em;
 }
 
 .opinion .rating {
     color: #e63946;
-    font-size: 1.1em;
+    font-size: 1em;
 }
 
 .opinion p {
