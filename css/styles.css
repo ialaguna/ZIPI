@@ -134,61 +134,19 @@ h2 {
     background-color: #d62828;
 }
 
-/* Opiniones Section */
-section#opinions {
-    background-color: rgba(255, 255, 255, 0.8);
-    text-align: center; /* Centrar el texto */
-    padding: 60px 0;
-    border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-    max-width: 800px;
-    margin: 0 auto; /* Centrar el contenedor */
-}
-
-section#opinions h2 {
-    color: #e63946;
-    font-size: 2em;
+/* Ensure the footer is styled similarly to the header */
+footer {
+    background-color: #e63946;
+    color: white;
     text-align: center;
-    margin-bottom: 20px;
+    padding: 10px 0;
+    position: relative;
+    bottom: 0;
+    width: 100%;
 }
 
-#opinionsList {
-    margin-top: 30px;
-    padding: 20px;
-    border-radius: 10px;
-    background: rgba(255, 255, 255, 0.8);
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    text-align: left; /* Alinear texto a la izquierda */
-    max-width: 600px; /* Ancho máximo para centrar */
-    margin: 0 auto; /* Centrar */
-}
-
-.opinion {
-    background: white;
-    padding: 15px;
-    margin-bottom: 15px;
-    border-radius: 5px;
-    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
-}
-
-.opinion h4 {
-    margin: 0 0 5px 0;
-    font-size: 1em;
-}
-
-.opinion .rating {
-    color: #e63946;
-    font-size: 1em;
-}
-
-.opinion p {
+footer p {
     margin: 0;
-    color: #333;
-}
-
-.opinion .date {
-    font-size: 0.9em;
-    color: #999;
 }
 
 /* Additional styles for other sections, if needed */
@@ -267,19 +225,4 @@ section#contact .container {
 .carousel .prev:hover,
 .carousel .next:hover {
     background-color: rgba(0, 0, 0, 0.8);
-}
-
-/* Ensure the footer is styled similarly to the header */
-footer {
-    background-color: #e63946;
-    color: white;
-    text-align: center;
-    padding: 0px 0;
-    position: relative;
-    bottom: 0;
-    width: 100%;
-}
-
-footer p {
-    margin: 0;
 }
