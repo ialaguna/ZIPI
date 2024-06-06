@@ -407,6 +407,92 @@ footer {
     section#about .value p {
         font-size: 1em;
     }
+    /* Opiniones Section */
+section#opinions {
+    background-color: rgba(255, 255, 255, 0.8);
+    text-align: left;
+    padding: 60px 0;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+
+section#opinions h2 {
+    color: #e63946;
+    font-size: 2.5em;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+section#opinions form {
+    max-width: 600px;
+    margin: 0 auto;
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+section#opinions form label {
+    display: block;
+    margin-top: 10px;
+    font-weight: bold;
+}
+
+section#opinions form input[type="text"],
+section#opinions form select,
+section#opinions form textarea {
+    width: 100%;
+    padding: 10px;
+    margin-top: 5px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+}
+
+section#opinions form button {
+    display: block;
+    width: 100%;
+    padding: 15px;
+    margin-top: 10px;
+    background-color: #e63946;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1.1em;
+    transition: background-color 0.3s ease;
+}
+
+section#opinions form button:hover {
+    background-color: #d62828;
+}
+
+#opinionsList {
+    margin-bottom: 30px;
+}
+
+.opinion {
+    background: white;
+    padding: 15px;
+    margin-bottom: 15px;
+    border-radius: 5px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+}
+
+.opinion h4 {
+    margin: 0 0 5px 0;
+    font-size: 1.2em;
+}
+
+.opinion .rating {
+    color: #e63946;
+    font-size: 1.1em;
+}
+
+.opinion p {
+    margin: 0;
+    color: #333;
+}
+
 
     section#contact form {
         padding: 15px;
