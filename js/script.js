@@ -107,7 +107,7 @@ document.addEventListener('DOMContentLoaded', function() {
             event.preventDefault();
 
             let username = document.getElementById('opinionUsername').value;
-            let rating = document.getElementById('rating').value;
+            let rating = document.querySelector('input[name="rating"]:checked').value;
             let review = document.getElementById('review').value;
 
             if (username && rating && review) {
@@ -135,23 +135,27 @@ document.addEventListener('DOMContentLoaded', function() {
 
     function loadOpinions() {
         const opinionsList = document.getElementById('opinionsList');
-        opinionsList.innerHTML = '';
+        if (opinionsList) {
+            opinionsList.innerHTML = '';
 
-        onValue(ref(database, 'opinions'), (snapshot) => {
-            snapshot.forEach((childSnapshot) => {
-                let opinion = childSnapshot.val();
-                let opinionElement = document.createElement('div');
-                opinionElement.classList.add('opinion');
-                let date = new Date(opinion.timestamp).toLocaleDateString();
-                opinionElement.innerHTML = `
-                    <h4>${opinion.username}</h4>
-                    <div class="rating">${'★'.repeat(opinion.rating)}</div>
-                    <p>${opinion.review}</p>
-                    <div class="date">${date}</div>
-                `;
-                opinionsList.appendChild(opinionElement);
+            onValue(ref(database, 'opinions'), (snapshot) => {
+                snapshot.forEach((childSnapshot) => {
+                    let opinion = childSnapshot.val();
+                    let opinionElement = document.createElement('div');
+                    opinionElement.classList.add('opinion');
+                    let date = new Date(opinion.timestamp).toLocaleDateString();
+                    opinionElement.innerHTML = `
+                        <h4>${opinion.username}</h4>
+                        <div class="rating">${'★'.repeat(opinion.rating)}</div>
+                        <p>${opinion.review}</p>
+                        <div class="date">${date}</div>
+                    `;
+                    opinionsList.appendChild(opinionElement);
+                });
             });
-        });
+        } else {
+            console.log("Elemento opinionsList no encontrado en el DOM.");
+        }
     }
 
     loadOpinions();
