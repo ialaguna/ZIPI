@@ -6,7 +6,6 @@ body {
     box-sizing: border-box;
 }
 
-/* Header styles */
 header {
     background-color: #e63946;
     color: white;
@@ -34,14 +33,12 @@ header nav ul li a:hover {
     text-decoration: underline;
 }
 
-/* Container */
 .container {
     width: 80%;
     margin: auto;
     overflow: hidden;
 }
 
-/* Headings */
 h1, h2, h3, h4, h5, h6 {
     margin: 0;
     padding: 0;
