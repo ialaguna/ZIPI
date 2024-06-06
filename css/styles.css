@@ -4,6 +4,7 @@ body {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    font-size: 16px; /* Tamaño de fuente general */
 }
 
 header {
@@ -48,6 +49,7 @@ h2 {
     margin: 20px 0;
     color: #333;
     text-align: center;
+    font-size: 2em; /* Tamaño de fuente de los encabezados */
 }
 
 /* Form Style (applied to both forms) */
@@ -267,6 +269,21 @@ section#contact .container {
 .carousel .prev:hover,
 .carousel .next:hover {
     background-color: rgba(0, 0, 0, 0.8);
+}
+
+/* Ensure the footer is styled similarly to the header */
+footer {
+    background-color: #e63946;
+    color: white;
+    text-align: center;
+    padding: 10px 0;
+    position: relative;
+    bottom: 0;
+    width: 100%;
+}
+
+footer p {
+    margin: 0;
 }
 /* Additional styles for forum-like appearance */
 section#opinions {
