@@ -222,4 +222,3 @@ function getRandomUser(currentUser) {
         }, { onlyOnce: true });
     });
 }
-
