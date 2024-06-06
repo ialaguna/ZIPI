@@ -268,22 +268,6 @@ section#contact .container {
 .carousel .next:hover {
     background-color: rgba(0, 0, 0, 0.8);
 }
-
-/* Ensure the footer is styled similarly to the header */
-footer {
-    background-color: #e63946;
-    color: white;
-    text-align: center;
-    padding: 10px 0;
-    position: relative;
-    bottom: 0;
-    width: 100%;
-}
-
-footer p {
-    margin: 0;
-}
-
 /* Additional styles for forum-like appearance */
 section#opinions {
     background-color: rgba(255, 255, 255, 0.95);
