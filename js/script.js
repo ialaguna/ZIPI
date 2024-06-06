@@ -100,6 +100,60 @@ document.addEventListener('DOMContentLoaded', function() {
     showSlides(1, 1);
     showSlides(1, 2);
 
+    // Manejo de opiniones
+    const opinionForm = document.getElementById('opinionForm');
+    if (opinionForm) {
+        opinionForm.addEventListener('submit', function(event) {
+            event.preventDefault();
+
+            let username = document.getElementById('opinionUsername').value;
+            let rating = document.getElementById('rating').value;
+            let review = document.getElementById('review').value;
+
+            if (username && rating && review) {
+                let opinion = {
+                    username: username,
+                    rating: rating,
+                    review: review,
+                    timestamp: new Date().getTime()
+                };
+
+                push(ref(database, 'opinions'), opinion)
+                    .then(() => {
+                        console.log('Opinión guardada en Firebase');
+                        loadOpinions();
+                        opinionForm.reset();
+                    })
+                    .catch((error) => {
+                        console.log('Error al guardar la opinión en Firebase:', error);
+                    });
+            } else {
+                alert("Por favor, completa todos los campos antes de enviar tu opinión.");
+            }
+        });
+    }
+
+    function loadOpinions() {
+        const opinionsList = document.getElementById('opinionsList');
+        opinionsList.innerHTML = '';
+
+        onValue(ref(database, 'opinions'), (snapshot) => {
+            snapshot.forEach((childSnapshot) => {
+                let opinion = childSnapshot.val();
+                let opinionElement = document.createElement('div');
+                opinionElement.classList.add('opinion');
+                opinionElement.innerHTML = `
+                    <h4>${opinion.username}</h4>
+                    <div class="rating">${'★'.repeat(opinion.rating)}</div>
+                    <p>${opinion.review}</p>
+                `;
+                opinionsList.appendChild(opinionElement);
+            });
+        });
+    }
+
+    loadOpinions();
+
     if (window.location.pathname.endsWith('result.html')) {
         let currentUser = JSON.parse(localStorage.getItem('currentUser'));
         if (currentUser) {
@@ -162,3 +216,4 @@ function getRandomUser(currentUser) {
         }, { onlyOnce: true });
     });
 }
+
