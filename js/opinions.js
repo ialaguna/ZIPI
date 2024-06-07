@@ -79,3 +79,50 @@ document.addEventListener('DOMContentLoaded', function() {
 
     loadOpinions();
 });
+document.addEventListener('DOMContentLoaded', function() {
+    loadOpinions();
+});
+
+function loadOpinions() {
+    const opinionsList = document.getElementById('opinionsList');
+    opinionsList.innerHTML = ''; // Limpiar el contenido existente
+
+    // Suponiendo que tienes un array de opiniones
+    let opinions = getOpinionsFromStorageOrAPI();
+
+    // Ordenar opiniones por fecha de más reciente a más antigua
+    opinions.sort((a, b) => new Date(b.date) - new Date(a.date));
+
+    // Renderizar opiniones
+    opinions.forEach(opinion => {
+        const opinionElement = document.createElement('div');
+        opinionElement.classList.add('opinion');
+        
+        opinionElement.innerHTML = `
+            <h4>${opinion.username}</h4>
+            <div class="rating">${renderStars(opinion.rating)}</div>
+            <p>${opinion.review}</p>
+            <div class="date">${new Date(opinion.date).toLocaleDateString()}</div>
+        `;
+        
+        opinionsList.appendChild(opinionElement);
+    });
+}
+
+function renderStars(rating) {
+    let stars = '';
+    for (let i = 1; i <= 5; i++) {
+        stars += `<span class="star">${i <= rating ? '&#9733;' : '&#9734;'}</span>`;
+    }
+    return stars;
+}
+
+// Ejemplo de función para obtener opiniones, reemplazar con la fuente de datos real
+function getOpinionsFromStorageOrAPI() {
+    return [
+        { username: 'User1', rating: 5, review: 'Great product!', date: '2024-01-01' },
+        { username: 'User2', rating: 4, review: 'Very good.', date: '2024-01-02' },
+        // más opiniones...
+    ];
+}
+
