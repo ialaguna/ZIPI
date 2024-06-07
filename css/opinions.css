@@ -1,0 +1,291 @@
+/* General styles */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    background: url('images/background.jpg') no-repeat center center fixed;
+    background-size: cover;
+}
+
+header {
+    background-color: #e63946;
+    color: white;
+    padding: 10px 0;
+    text-align: center;
+}
+
+header nav ul {
+    list-style: none;
+    padding: 0;
+}
+
+header nav ul li {
+    display: inline;
+    margin: 0 10px;
+}
+
+header nav ul li a {
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+header nav ul li a:hover {
+    text-decoration: underline;
+}
+
+.container {
+    width: 80%;
+    margin: auto;
+    overflow: hidden;
+    background: rgba(255, 255, 255, 0.8);
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+h1, h2, h3, h4, h5, h6 {
+    margin: 0;
+    padding: 0;
+}
+
+h2 {
+    margin: 20px 0;
+    color: #333;
+    text-align: center;
+    font-size: 2em;
+}
+
+/* Form Style (applied to both forms) */
+.form-style {
+    max-width: 600px;
+    margin: 20px auto;
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-style label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: bold;
+    color: #333;
+}
+
+.form-style input[type="text"],
+.form-style textarea {
+    width: 100%;
+    padding: 12px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    font-size: 1em;
+    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
+    transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+.form-style input[type="text"]:focus,
+.form-style textarea:focus {
+    border-color: #e63946;
+    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1), 0 0 8px rgba(230, 57, 70, 0.3);
+}
+
+.form-style .star-rating {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+}
+
+.form-style .star-rating input {
+    display: none;
+}
+
+.form-style .star-rating label {
+    font-size: 2em;
+    color: #ccc;
+    cursor: pointer;
+    transition: color 0.2s;
+}
+
+.form-style .star-rating input:checked ~ label,
+.form-style .star-rating label:hover,
+.form-style .star-rating label:hover ~ label {
+    color: #e63946;
+}
+
+.form-style textarea {
+    height: 100px;
+    resize: vertical;
+}
+
+.form-style button {
+    display: block;
+    width: 100%;
+    padding: 15px;
+    margin-top: 10px;
+    background-color: #e63946;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1em;
+    transition: background-color 0.3s ease;
+}
+
+.form-style button:hover {
+    background-color: #d62828;
+}
+
+/* Opiniones Section */
+section#opinions {
+    text-align: center;
+    padding: 60px 0;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    max-width: 800px;
+    margin: 0 auto; /* Centrar el contenedor */
+}
+
+section#opinions h2 {
+    color: #e63946;
+    font-size: 2.5em;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+#opinionsList {
+    margin-top: 30px;
+    padding: 20px;
+    border-radius: 10px;
+    background: rgba(255, 255, 255, 0.8);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    text-align: left; /* Alinear texto a la izquierda */
+    max-width: 600px; /* Ancho máximo para centrar */
+    margin: 0 auto; /* Centrar */
+}
+
+.opinion {
+    background: white;
+    padding: 15px;
+    margin-bottom: 15px;
+    border-radius: 5px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+}
+
+.opinion h4 {
+    margin: 0 0 5px 0;
+    font-size: 1em;
+}
+
+.opinion .rating {
+    color: #e63946;
+    font-size: 1em;
+}
+
+.opinion p {
+    margin: 0;
+    color: #333;
+}
+
+.opinion .date {
+    font-size: 0.9em;
+    color: #999;
+}
+
+/* Additional styles for other sections, if needed */
+section#home,
+section#products,
+section#game,
+section#about,
+section#contact {
+    padding: 60px 0;
+}
+
+section#home .container,
+section#products .container,
+section#game .container,
+section#about .container,
+section#contact .container {
+    background: rgba(255, 255, 255, 0.8);
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.product-slider {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+.product {
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    margin: 10px;
+    padding: 10px;
+    flex: 1 1 calc(33% - 20px);
+    box-sizing: border-box;
+}
+
+.product img {
+    max-width: 100%;
+    border-radius: 10px;
+}
+
+.carousel {
+    position: relative;
+    width: 100%;
+}
+
+.carousel img {
+    width: 100%;
+    border-radius: 10px;
+}
+
+.carousel .prev,
+.carousel .next {
+    cursor: pointer;
+    position: absolute;
+    top: 50%;
+    width: auto;
+    margin-top: -22px;
+    padding: 16px;
+    color: white;
+    font-weight: bold;
+    font-size: 18px;
+    transition: 0.6s ease;
+    border-radius: 0 3px 3px 0;
+    user-select: none;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+.carousel .next {
+    right: 0;
+    border-radius: 3px 0 0 3px;
+}
+
+.carousel .prev:hover,
+.carousel .next:hover {
+    background-color: rgba(0, 0, 0, 0.8);
+}
+
+/* Ensure the footer is styled similarly to the header */
+footer {
+    background-color: #e63946;
+    color: white;
+    text-align: center;
+    padding: 10px 0;
+    position: relative;
+    bottom: 0;
+    width: 100%;
+}
+
+footer p {
+    margin: 0;
+}
