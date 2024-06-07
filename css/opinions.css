@@ -28,7 +28,7 @@ header nav ul li {
 header nav ul li a {
     color: white;
     text-decoration: none;
-    font-weight: bold;
+    font-weight: none;
 }
 
 header nav ul li a:hover {
