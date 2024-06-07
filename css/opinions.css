@@ -48,7 +48,17 @@ nav ul li a {
 nav ul li a:hover {
     text-decoration: underline;
 }
+h2, h3, h4, h5, h6 {
+    margin: 0;
+    padding: 0;
+}
 
+h2 {
+    margin: 20px 0;
+    color: #333;
+    text-align: center;
+    font-size: 2em;
+}
 /* Opiniones Section */
 section#opinions {
     text-align: center;
