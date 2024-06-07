@@ -117,12 +117,3 @@ function renderStars(rating) {
     return stars;
 }
 
-// Ejemplo de función para obtener opiniones, reemplazar con la fuente de datos real
-function getOpinionsFromStorageOrAPI() {
-    return [
-        { username: 'User1', rating: 5, review: 'Great product!', date: '2024-01-01' },
-        { username: 'User2', rating: 4, review: 'Very good.', date: '2024-01-02' },
-        // más opiniones...
-    ];
-}
-
