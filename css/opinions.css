@@ -41,7 +41,7 @@ header nav ul li {
 header nav ul li a {
     color: white;
     text-decoration: none;
-    font-weight: normal;
+    font-weight: normal; /* Cambia a normal */
 }
 
 header nav ul li a:hover {
@@ -62,7 +62,7 @@ section#opinions {
 section#opinions h2 {
     color: #e63946;
     font-size: 2.5em;
-    text-align: center;
+    text-align: center; /* Centrar el texto */
     margin-bottom: 20px;
     margin-top: 0; /* Añadir margen superior para que esté más cerca de la parte superior de la página */
 }
@@ -73,7 +73,7 @@ section#opinions h2 {
     border-radius: 10px;
     background: rgba(255, 255, 255, 0.8);
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    text-align: center; /* Alinear texto a la izquierda */
+    text-align: left; /* Alinear texto a la izquierda */
     max-width: 600px; /* Ancho máximo para centrar */
     margin: 0 auto; /* Centrar */
 }
