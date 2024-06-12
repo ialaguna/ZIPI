@@ -190,11 +190,6 @@ section#opinions form.form-style .star-rating input:checked ~ label ~ label {
     color: #ccc; /* Restablece el color de las estrellas no seleccionadas */
 }
 
-
-section#opinions form.form-style .star-rating input:checked ~ label ~ label {
-    color: #ccc;
-}
-
 section#opinions form.form-style textarea {
     height: 100px;
     resize: vertical;
