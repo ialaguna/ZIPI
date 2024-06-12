@@ -176,10 +176,20 @@ section#opinions form.form-style .star-rating label {
 
 /* Ajustar el comportamiento de las estrellas */
 section#opinions form.form-style .star-rating label:hover,
-section#opinions form.form-style .star-rating label:hover ~ label,
-section#opinions form.form-style .star-rating input:checked ~ label {
-    color: #e63946;
+section#opinions form.form-style .star-rating label:hover ~ label {
+    color: #ccc; /* Restablece el color de las estrellas a la derecha de la seleccionada */
 }
+section#opinions form.form-style .star-rating label:hover,
+section#opinions form.form-style .star-rating label:hover ~ label {
+    color: #e63946; /* Cambia el color de las estrellas a la izquierda de la seleccionada */
+}
+section#opinions form.form-style .star-rating input:checked ~ label {
+    color: #e63946; /* Mantiene el color de las estrellas seleccionadas */
+}
+section#opinions form.form-style .star-rating input:checked ~ label ~ label {
+    color: #ccc; /* Restablece el color de las estrellas no seleccionadas */
+}
+
 
 section#opinions form.form-style .star-rating input:checked ~ label ~ label {
     color: #ccc;
