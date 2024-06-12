@@ -89,32 +89,38 @@ document.addEventListener('DOMContentLoaded', function() {
 
     loadOpinions();
 });
- let rating = 0;
+const stars = document.querySelectorAll('.star');
+    let currentRating = 0;
 
-        function renderStars(rating) {
-            let stars = '';
-            for (let i = 1; i <= 5; i++) {
-                stars += `<span class="star" data-value="${i}">${i <= rating ? '&#9733;' : '&#9734;'}</span>`;
+    stars.forEach(star => {
+        star.addEventListener('mouseover', handleMouseOver);
+        star.addEventListener('mouseout', handleMouseOut);
+        star.addEventListener('click', handleClick);
+    });
+
+    function handleMouseOver(event) {
+        const starValue = parseInt(event.target.getAttribute('data-value'));
+        highlightStars(starValue);
+    }
+
+    function handleMouseOut() {
+        highlightStars(currentRating);
+    }
+
+    function handleClick(event) {
+        currentRating = parseInt(event.target.getAttribute('data-value'));
+        highlightStars(currentRating);
+    }
+
+    function highlightStars(rating) {
+        stars.forEach(star => {
+            const starValue = parseInt(star.getAttribute('data-value'));
+            if (starValue <= rating) {
+                star.classList.add('hovered');
+            } else {
+                star.classList.remove('hovered');
             }
-            return stars;
-        }
+        });
+    }
+});
 
-        function updateRating(newRating) {
-            rating = newRating;
-            document.getElementById('star-rating').innerHTML = renderStars(rating);
-            attachClickHandlers();
-        }
-
-        function attachClickHandlers() {
-            const stars = document.querySelectorAll('.star');
-            stars.forEach(star => {
-                star.addEventListener('click', function() {
-                    const value = parseInt(this.getAttribute('data-value'));
-                    updateRating(value);
-                });
-            });
-        }
-
-        // Initial render
-        document.getElementById('star-rating').innerHTML = renderStars(rating);
-        attachClickHandlers();
