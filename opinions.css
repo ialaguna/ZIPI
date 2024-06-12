@@ -289,3 +289,20 @@ footer {
 footer p {
     margin: 0;
 }
+.star-rating {
+    display: flex;
+    direction: row;
+}
+
+.star {
+    font-size: 2rem;
+    color: grey;
+    cursor: pointer;
+    transition: color 0.2s;
+}
+
+.star:hover,
+.star.hovered,
+.star.selected {
+    color: gold;
+}
