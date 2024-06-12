@@ -1,54 +1,47 @@
-/* General Styles */
+/* General styles */
 body {
-    font-family: 'Raleway', sans-serif;
+    font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
-    background-color: #f5f5f5; /* Light background */
-    color: #333; /* Darker text color for readability */
-    line-height: 1.6;
+    box-sizing: border-box;
+    background: url('images/background.jpg') no-repeat center center fixed;
+    background-size: cover;
 }
 
-/* Container */
-.container {
-    width: 90%; /* Ajusta este valor según tu necesidad */
-    margin: 0 auto;
-    max-width: 1200px; /* Ajusta el ancho máximo si es necesario */
-    padding: 0 10px; /* Add padding to ensure proper spacing on mobile */
-}
-
-/* Header Styles */
 header {
+    background-color: #e63946;
     color: white;
     padding: 10px 0;
-}
-
-header h1 {
-    margin: 0;
-    font-size: 4.5em;
     text-align: center;
 }
 
-nav ul {
+header nav ul {
     list-style: none;
     padding: 0;
-    text-align: center;
 }
 
-nav ul li {
+header nav ul li {
     display: inline;
-    margin: 0 15px;
+    margin: 0 10px;
 }
 
-nav ul li a {
+header nav ul li a {
     color: white;
     text-decoration: none;
-    font-size: 1.1em;
+    font-weight: bold;
 }
 
-nav ul li a:hover {
+header nav ul li a:hover {
     text-decoration: underline;
 }
-h2, h3, h4, h5, h6 {
+
+.container {
+    width: 80%;
+    margin: auto;
+    overflow: hidden;
+}
+
+h1, h2, h3, h4, h5, h6 {
     margin: 0;
     padding: 0;
 }
@@ -59,6 +52,7 @@ h2 {
     text-align: center;
     font-size: 2em;
 }
+
 /* Opiniones Section */
 section#opinions {
     text-align: center;
@@ -176,18 +170,13 @@ section#opinions form.form-style .star-rating label {
 
 /* Ajustar el comportamiento de las estrellas */
 section#opinions form.form-style .star-rating label:hover,
-section#opinions form.form-style .star-rating label:hover ~ label {
-    color: #ccc; /* Restablece el color de las estrellas a la derecha de la seleccionada */
-}
-section#opinions form.form-style .star-rating label:hover,
-section#opinions form.form-style .star-rating label:hover ~ label {
-    color: #e63946; /* Cambia el color de las estrellas a la izquierda de la seleccionada */
-}
+section#opinions form.form-style .star-rating label:hover ~ label,
 section#opinions form.form-style .star-rating input:checked ~ label {
-    color: #e63946; /* Mantiene el color de las estrellas seleccionadas */
+    color: #e63946;
 }
+
 section#opinions form.form-style .star-rating input:checked ~ label ~ label {
-    color: #ccc; /* Restablece el color de las estrellas no seleccionadas */
+    color: #ccc;
 }
 
 section#opinions form.form-style textarea {
