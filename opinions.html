@@ -24,6 +24,15 @@
         .star.selected {
             color: gold;
         }
+        .opinion {
+            border: 1px solid #ccc;
+            padding: 10px;
+            margin: 10px 0;
+            background-color: #fff;
+        }
+        .opinion .stars {
+            display: flex;
+        }
     </style>
     <script>
         document.addEventListener('DOMContentLoaded', () => {
@@ -62,6 +71,45 @@
                     }
                 });
             }
+
+            const form = document.getElementById('opinionForm');
+            const opinionsList = document.getElementById('opinionsList');
+
+            form.addEventListener('submit', (event) => {
+                event.preventDefault();
+
+                const username = document.getElementById('opinionUsername').value;
+                const review = document.getElementById('review').value;
+
+                const opinion = document.createElement('div');
+                opinion.classList.add('opinion');
+
+                const userElement = document.createElement('p');
+                userElement.textContent = `Nombre: ${username}`;
+
+                const reviewElement = document.createElement('p');
+                reviewElement.textContent = `Reseña: ${review}`;
+
+                const starsElement = document.createElement('div');
+                starsElement.classList.add('stars');
+                for (let i = 1; i <= 5; i++) {
+                    const starSpan = document.createElement('span');
+                    starSpan.classList.add('star');
+                    starSpan.textContent = '★';
+                    starSpan.style.color = i <= currentRating ? 'gold' : 'grey';
+                    starsElement.appendChild(starSpan);
+                }
+
+                opinion.appendChild(userElement);
+                opinion.appendChild(starsElement);
+                opinion.appendChild(reviewElement);
+
+                opinionsList.appendChild(opinion);
+
+                form.reset();
+                currentRating = 0;
+                highlightStars(currentRating);
+            });
         });
     </script>
 </head>
