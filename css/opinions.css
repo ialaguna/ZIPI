@@ -13,7 +13,7 @@ body {
     width: 90%; /* Ajusta este valor según tu necesidad */
     margin: 0 auto;
     max-width: 1200px; /* Ajusta el ancho máximo si es necesario */
-    padding: 0 15px; /* Add padding to ensure proper spacing on mobile */
+    padding: 0 10px; /* Add padding to ensure proper spacing on mobile */
 }
 
 /* Header Styles */
