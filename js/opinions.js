@@ -1,6 +1,6 @@
 // Importar las funciones necesarias de los SDKs de Firebase
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
-import { getDatabase, ref, push, onValue, remove } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js";
+import { getDatabase, ref, push, onValue, remove, query, orderByChild } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js";
 
 // Configurar Firebase con los parámetros del proyecto
 const firebaseConfig = {
@@ -57,9 +57,19 @@ document.addEventListener('DOMContentLoaded', function() {
         if (opinionsList) {
             opinionsList.innerHTML = '';
 
-            onValue(ref(database, 'opinions'), (snapshot) => {
+            const opinionsRef = ref(database, 'opinions');
+            const opinionsQuery = query(opinionsRef, orderByChild('timestamp'));
+
+            onValue(opinionsQuery, (snapshot) => {
+                let opinions = [];
                 snapshot.forEach((childSnapshot) => {
-                    let opinion = childSnapshot.val();
+                    opinions.push(childSnapshot.val());
+                });
+
+                // Ordenar opiniones de más reciente a más antiguo
+                opinions.sort((a, b) => b.timestamp - a.timestamp);
+
+                opinions.forEach((opinion) => {
                     let opinionElement = document.createElement('div');
                     opinionElement.classList.add('opinion');
                     let date = new Date(opinion.timestamp).toLocaleDateString();
@@ -79,41 +89,4 @@ document.addEventListener('DOMContentLoaded', function() {
 
     loadOpinions();
 });
-document.addEventListener('DOMContentLoaded', function() {
-    loadOpinions();
-});
-
-function loadOpinions() {
-    const opinionsList = document.getElementById('opinionsList');
-    opinionsList.innerHTML = ''; // Limpiar el contenido existente
-
-    // Suponiendo que tienes un array de opiniones
-    let opinions = getOpinionsFromStorageOrAPI();
-
-    // Ordenar opiniones por fecha de más reciente a más antigua
-    opinions.sort((a, b) => new Date(b.date) - new Date(a.date));
-
-    // Renderizar opiniones
-    opinions.forEach(opinion => {
-        const opinionElement = document.createElement('div');
-        opinionElement.classList.add('opinion');
-        
-        opinionElement.innerHTML = `
-            <h4>${opinion.username}</h4>
-            <div class="rating">${renderStars(opinion.rating)}</div>
-            <p>${opinion.review}</p>
-            <div class="date">${new Date(opinion.date).toLocaleDateString()}</div>
-        `;
-        
-        opinionsList.appendChild(opinionElement);
-    });
-}
-
-function renderStars(rating) {
-    let stars = '';
-    for (let i = 1; i <= 5; i++) {
-        stars += `<span class="star">${i <= rating ? '&#9733;' : '&#9734;'}</span>`;
-    }
-    return stars;
-}
 
