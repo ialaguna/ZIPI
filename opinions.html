@@ -14,6 +14,43 @@
             background: url('images/header.jpg') no-repeat center center/cover;
         }
     </style>
+     <script>
+       document.addEventListener('DOMContentLoaded', () => {
+    const stars = document.querySelectorAll('.star');
+    let currentRating = 0;
+
+    stars.forEach(star => {
+        star.addEventListener('mouseover', handleMouseOver);
+        star.addEventListener('mouseout', handleMouseOut);
+        star.addEventListener('click', handleClick);
+    });
+
+    function handleMouseOver(event) {
+        const starValue = parseInt(event.target.getAttribute('data-value'));
+        highlightStars(starValue);
+    }
+
+    function handleMouseOut() {
+        highlightStars(currentRating);
+    }
+
+    function handleClick(event) {
+        currentRating = parseInt(event.target.getAttribute('data-value'));
+        highlightStars(currentRating);
+    }
+
+    function highlightStars(rating) {
+        stars.forEach(star => {
+            const starValue = parseInt(star.getAttribute('data-value'));
+            if (starValue <= rating) {
+                star.classList.add('hovered');
+            } else {
+                star.classList.remove('hovered');
+            }
+        });
+    }
+});
+    </script>
 </head>
 <body>
     <header>
