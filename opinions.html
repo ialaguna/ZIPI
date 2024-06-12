@@ -75,20 +75,49 @@
             const form = document.getElementById('opinionForm');
             const opinionsList = document.getElementById('opinionsList');
 
+            // Cargar opiniones desde localStorage
+            loadOpinions();
+
             form.addEventListener('submit', (event) => {
                 event.preventDefault();
 
                 const username = document.getElementById('opinionUsername').value;
                 const review = document.getElementById('review').value;
 
-                const opinion = document.createElement('div');
-                opinion.classList.add('opinion');
+                const opinion = {
+                    username: username,
+                    review: review,
+                    rating: currentRating
+                };
+
+                saveOpinion(opinion);
+                displayOpinion(opinion);
+
+                form.reset();
+                currentRating = 0;
+                highlightStars(currentRating);
+            });
+
+            function saveOpinion(opinion) {
+                let opinions = JSON.parse(localStorage.getItem('opinions')) || [];
+                opinions.push(opinion);
+                localStorage.setItem('opinions', JSON.stringify(opinions));
+            }
+
+            function loadOpinions() {
+                let opinions = JSON.parse(localStorage.getItem('opinions')) || [];
+                opinions.forEach(displayOpinion);
+            }
+
+            function displayOpinion(opinion) {
+                const opinionElement = document.createElement('div');
+                opinionElement.classList.add('opinion');
 
                 const userElement = document.createElement('p');
-                userElement.textContent = `Nombre: ${username}`;
+                userElement.textContent = `Nombre: ${opinion.username}`;
 
                 const reviewElement = document.createElement('p');
-                reviewElement.textContent = `Reseña: ${review}`;
+                reviewElement.textContent = `Reseña: ${opinion.review}`;
 
                 const starsElement = document.createElement('div');
                 starsElement.classList.add('stars');
@@ -96,20 +125,16 @@
                     const starSpan = document.createElement('span');
                     starSpan.classList.add('star');
                     starSpan.textContent = '★';
-                    starSpan.style.color = i <= currentRating ? 'gold' : 'grey';
+                    starSpan.style.color = i <= opinion.rating ? 'gold' : 'grey';
                     starsElement.appendChild(starSpan);
                 }
 
-                opinion.appendChild(userElement);
-                opinion.appendChild(starsElement);
-                opinion.appendChild(reviewElement);
+                opinionElement.appendChild(userElement);
+                opinionElement.appendChild(starsElement);
+                opinionElement.appendChild(reviewElement);
 
-                opinionsList.appendChild(opinion);
-
-                form.reset();
-                currentRating = 0;
-                highlightStars(currentRating);
-            });
+                opinionsList.appendChild(opinionElement);
+            }
         });
     </script>
 </head>
