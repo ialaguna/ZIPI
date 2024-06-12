@@ -89,10 +89,32 @@ document.addEventListener('DOMContentLoaded', function() {
 
     loadOpinions();
 });
-function renderStars(rating) {
-    let stars = '';
-    for (let i = 1; i <= 5; i++) {
-        stars += `<span class="star">${i <= rating ? '&#9733;' : '&#9734;'}</span>`;
-    }
-    return stars;
-}
+ let rating = 0;
+
+        function renderStars(rating) {
+            let stars = '';
+            for (let i = 1; i <= 5; i++) {
+                stars += `<span class="star" data-value="${i}">${i <= rating ? '&#9733;' : '&#9734;'}</span>`;
+            }
+            return stars;
+        }
+
+        function updateRating(newRating) {
+            rating = newRating;
+            document.getElementById('star-rating').innerHTML = renderStars(rating);
+            attachClickHandlers();
+        }
+
+        function attachClickHandlers() {
+            const stars = document.querySelectorAll('.star');
+            stars.forEach(star => {
+                star.addEventListener('click', function() {
+                    const value = parseInt(this.getAttribute('data-value'));
+                    updateRating(value);
+                });
+            });
+        }
+
+        // Initial render
+        document.getElementById('star-rating').innerHTML = renderStars(rating);
+        attachClickHandlers();
