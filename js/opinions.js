@@ -89,4 +89,10 @@ document.addEventListener('DOMContentLoaded', function() {
 
     loadOpinions();
 });
-
+function renderStars(rating) {
+    let stars = '';
+    for (let i = 1; i <= 5; i++) {
+        stars += `<span class="star">${i <= rating ? '&#9733;' : '&#9734;'}</span>`;
+    }
+    return stars;
+}
