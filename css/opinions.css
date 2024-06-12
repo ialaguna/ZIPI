@@ -9,15 +9,28 @@ body {
 }
 
 header {
+    width: 100%; /* Asegura que el header ocupa el ancho completo */
     background-color: #e63946;
     color: white;
-    padding: 10px 0;
+    padding: 30px 0; /* Ajusta este valor para aumentar la altura */
     text-align: center;
+    box-sizing: border-box; /* Incluye padding en el ancho total */
+}
+
+header .container {
+    width: 100%; /* Asegura que el contenedor ocupa el ancho completo */
+    max-width: 1200px; /* Puedes ajustar este valor según el máximo ancho deseado */
+    margin: 0 auto;
+    padding: 0 20px; /* Ajusta el padding según sea necesario */
+    box-sizing: border-box;
 }
 
 header nav ul {
     list-style: none;
     padding: 0;
+    margin: 0;
+    display: flex;
+    justify-content: center; /* Centra los elementos dentro del ul */
 }
 
 header nav ul li {
@@ -35,27 +48,9 @@ header nav ul li a:hover {
     text-decoration: underline;
 }
 
-.container {
-    width: 80%;
-    margin: auto;
-    overflow: hidden;
-}
-
-h1, h2, h3, h4, h5, h6 {
-    margin: 0;
-    padding: 0;
-}
-
-h2 {
-    margin: 20px 0;
-    color: #333;
-    text-align: center;
-    font-size: 2em;
-}
-
 /* Opiniones Section */
 section#opinions {
-    text-align: left;
+    text-align: center;
     padding: 60px 0;
     border-radius: 10px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
@@ -169,9 +164,9 @@ section#opinions form.form-style .star-rating label {
 }
 
 /* Ajustar el comportamiento de las estrellas */
+section#opinions form.form-style .star-rating input:checked ~ label,
 section#opinions form.form-style .star-rating label:hover,
-section#opinions form.form-style .star-rating label:hover ~ label,
-section#opinions form.form-style .star-rating input:checked ~ label {
+section#opinions form.form-style .star-rating label:hover ~ label {
     color: #e63946;
 }
 
@@ -216,4 +211,3 @@ footer {
 footer p {
     margin: 0;
 }
-
