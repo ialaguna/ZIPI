@@ -41,7 +41,7 @@ header nav ul li {
 header nav ul li a {
     color: white;
     text-decoration: none;
-    font-weight: bold;
+    font-weight: normal;
 }
 
 header nav ul li a:hover {
@@ -73,7 +73,7 @@ section#opinions h2 {
     border-radius: 10px;
     background: rgba(255, 255, 255, 0.8);
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    text-align: left; /* Alinear texto a la izquierda */
+    text-align: center; /* Alinear texto a la izquierda */
     max-width: 600px; /* Ancho máximo para centrar */
     margin: 0 auto; /* Centrar */
 }
