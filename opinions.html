@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Opiniones - Zipi</title>
     <link rel="stylesheet" href="css/opinions.css">
-      <style>
+    <style>
         body {
             background: url('images/background.jpg') no-repeat center center fixed;
             background-size: cover;
@@ -13,106 +13,109 @@
         header {
             background: url('images/header.jpg') no-repeat center center/cover;
         }
-          .star:hover,
-.star.hovered,
-.star.selected {
-    color: gold;
-}
-
+        .star {
+            font-size: 2rem;
+            color: grey;
+            cursor: pointer;
+            transition: color 0.2s;
+        }
+        .star:hover,
+        .star.hovered,
+        .star.selected {
+            color: gold;
+        }
     </style>
-     <script>
-       document.addEventListener('DOMContentLoaded', () => {
-    const stars = document.querySelectorAll('.star');
-    let currentRating = 0;
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const stars = document.querySelectorAll('.star');
+            let currentRating = 0;
 
-    stars.forEach(star => {
-        star.addEventListener('mouseover', handleMouseOver);
-        star.addEventListener('mouseout', handleMouseOut);
-        star.addEventListener('click', handleClick);
-    });
+            stars.forEach(star => {
+                star.addEventListener('mouseover', handleMouseOver);
+                star.addEventListener('mouseout', handleMouseOut);
+                star.addEventListener('click', handleClick);
+            });
 
-    function handleMouseOver(event) {
-        const starValue = parseInt(event.target.getAttribute('data-value'));
-        highlightStars(starValue);
-    }
+            function handleMouseOver(event) {
+                const starValue = parseInt(event.target.getAttribute('data-value'));
+                highlightStars(starValue);
+            }
 
-    function handleMouseOut() {
-        highlightStars(currentRating);
-    }
+            function handleMouseOut() {
+                highlightStars(currentRating);
+            }
 
-    function handleClick(event) {
-        currentRating = parseInt(event.target.getAttribute('data-value'));
-        highlightStars(currentRating);
-    }
+            function handleClick(event) {
+                currentRating = parseInt(event.target.getAttribute('data-value'));
+                highlightStars(currentRating);
+            }
 
-    function highlightStars(rating) {
-        stars.forEach(star => {
-            const starValue = parseInt(star.getAttribute('data-value'));
-            if (starValue <= rating) {
-                star.classList.add('hovered');
-            } else {
-                star.classList.remove('hovered');
+            function highlightStars(rating) {
+                stars.forEach(star => {
+                    const starValue = parseInt(star.getAttribute('data-value'));
+                    if (starValue <= rating) {
+                        star.classList.add('hovered');
+                        star.classList.add('selected');
+                    } else {
+                        star.classList.remove('hovered');
+                        star.classList.remove('selected');
+                    }
+                });
             }
         });
-    }
-});
     </script>
 </head>
 <body>
     <header>
         <div class="container">
-          <h1> </h1>
-           <h1> </h1>
-         <nav style="font-size: 1.1em;">
-              <ul>
-                <li><a href="index.html#home">Inicio</a></li>
-                <li><a href="index.html#products">Productos</a></li>
-                <li><a href="index.html#game">Juego</a></li>
-                <li><a href="opinions.html">Opiniones</a></li>
-                <li><a href="index.html#about">Sobre Nosotros</a></li>
-               <li><a href="index.html#contact">Contacto</a></li>
-             </ul>
-          </nav>
+            <h1> </h1>
+            <h1> </h1>
+            <nav style="font-size: 1.1em;">
+                <ul>
+                    <li><a href="index.html#home">Inicio</a></li>
+                    <li><a href="index.html#products">Productos</a></li>
+                    <li><a href="index.html#game">Juego</a></li>
+                    <li><a href="opinions.html">Opiniones</a></li>
+                    <li><a href="index.html#about">Sobre Nosotros</a></li>
+                    <li><a href="index.html#contact">Contacto</a></li>
+                </ul>
+            </nav>
         </div>
     </header>
-<h2 style="text-align:center; font-size: 75px">Opiniones</h2>
+    <h2 style="text-align:center; font-size: 75px">Opiniones</h2>
     <section id="opinions">
-    
-            <form id="opinionForm" class="form-style">
-                <div class="form-group">               
-                    <label for="opinionUsername">Nombre:</label>
-                    <input type="text" id="opinionUsername" name="username" required>
+        <form id="opinionForm" class="form-style">
+            <div class="form-group">               
+                <label for="opinionUsername">Nombre:</label>
+                <input type="text" id="opinionUsername" name="username" required>
+            </div>
+            <div class="form-group">
+                <label for="rating">Calificación:</label>
+                <div class="star-rating" style="display: flex; direction: row;">
+                    <span class="star" data-value="1">&#9733;</span>
+                    <span class="star" data-value="2">&#9733;</span>
+                    <span class="star" data-value="3">&#9733;</span>
+                    <span class="star" data-value="4">&#9733;</span>
+                    <span class="star" data-value="5">&#9733;</span>
                 </div>
-                <div class="form-group">
-                    <label for="rating">Calificación:</label>
-                    <div class="star-rating" style="display: flex; direction: row;">
-        <span class="star" data-value="1" style="font-size: 2rem; color: grey; cursor: pointer; transition: color 0.2s">&#9733;</span>
-        <span class="star" data-value="2" style="font-size: 2rem; color: grey; cursor: pointer; transition: color 0.2s">&#9733;</span>
-        <span class="star" data-value="3" style="font-size: 2rem; color: grey; cursor: pointer; transition: color 0.2s">&#9733;</span>
-        <span class="star" data-value="4" style="font-size: 2rem; color: grey; cursor: pointer; transition: color 0.2s">&#9733;</span>
-        <span class="star" data-value="5" style="font-size: 2rem; color: grey; cursor: pointer; transition: color 0.2s">&#9733;</span>
-    </div>
-                </div>
-                <div class="form-group">
-                    <label for="review">Reseña:</label>
-                    <textarea id="review" name="review" required></textarea>
-                </div>
-                <button type="submit">Enviar Opinión</button>
-            </form>
-        </div>
-         <div class="container">
-            
+            </div>
+            <div class="form-group">
+                <label for="review">Reseña:</label>
+                <textarea id="review" name="review" required></textarea>
+            </div>
+            <button type="submit">Enviar Opinión</button>
+        </form>
+        <div class="container">
             <div id="opinionsList">
                 <!-- Aquí se cargarán las opiniones -->
             </div>
+        </div>
     </section>
-
     <footer>
         <div class="container">
             <p>&copy; 2024 Zipi. Todos los derechos reservados.</p>
         </div>
     </footer>
-
     <script src="js/opinions.js" type="module"></script>
 </body>
 </html>
